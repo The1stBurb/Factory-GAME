@@ -7,15 +7,7 @@ scrn = pygame.display.set_mode((X, Y),pygame.RESIZABLE)#,pygame.FULLSCREEN)
 clk=pygame.time.Clock()
 pygame.font.init()
 font = pygame.font.SysFont(None, 10)
-class xANDy:
-    def __init__(self):
-        self.x=0
-        self.y=0
-    def setVal(self,pnts):
-        self.x=pnts[0]
-        self.y=pnts[1]
-    def git(self):
-        return self.x,self.y
+
 class pygameBases:
     def __init__(self):
         pass
