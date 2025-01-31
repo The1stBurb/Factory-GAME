@@ -6,6 +6,15 @@ scrn = pygame.display.set_mode((X, Y),pygame.RESIZABLE)#,pygame.FULLSCREEN)
 clk=pygame.time.Clock()
 pygame.font.init()
 font = pygame.font.SysFont(None, 10)
+class xANDy:
+    def __init__(self):
+        self.x=0
+        self.y=0
+    def setVal(self,pnts):
+        self.x=pnts[0]
+        self.y=pnts[1]
+    def git(self):
+        return self.x,self.y
 class pygameBases:
     def __init__(self):
         pass
@@ -34,21 +43,42 @@ class pygameBases:
     def imgGit(self,path,w,h):
         return self.resize(self.gitImg(path),w,h)
 pb=pygameBases()
-sz=20
+sz=100
 imgs=[
-    pb.imgGit("img\\factory-1.png",sz,sz),pb.imgGit("img\\factory-2.png",sz,sz),
-    pb.imgGit("img\\factory-3.png",sz,sz),pb.imgGit("img\\factory-4.png",sz,sz),
-    pb.imgGit("img\\factory-5.png",sz,sz),
+    pb.imgGit("img\\blank.png",sz,sz),pb.imgGit("img\\refiner-1.png",sz,sz),
 ]
-grid=[[0,1,0],[0,0,1],[1,1,0]]
+grid=[]
+def buildGrid(widh,high):
+    global grid
+    for i in range(widh):
+        grid.append([0 for j in range(widh)])
+def setup():
+    buildGrid(50,50)
+setup()
+ms=xANDy()#mouse
+grd=xANDy()#grid x and y
+pms=xANDy()#past mouse for dragging
+drag=False
 while True:
     scrn.fill((200,200,200))
     # mbt=1
+    pms.setVal(ms.git())
+    ms.setVal(pygame.mouse.get_pos())
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             # print(clickclack)
             quit()
+    buttons = pygame.mouse.get_pressed()
+    if buttons[2]:
+        grd.setVal((grd.x+(ms.x-pms.x),grd.y+(ms.y-pms.y)))
+        drag=True
+    elif drag:
+        drag=False
+    elif buttons[0]:
+        rx=ms.x//sz
+        ry=ms.y//sz
+        grid[ry][rx]=1
     for y,i in enumerate(grid):
         for x,j in enumerate(i):
-            pb.image(imgs[j],x*sz,y*sz)
+            pb.image(imgs[j],x*sz+grd.x,y*sz+grd.y)
     pygame.display.flip()
