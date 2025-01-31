@@ -1,5 +1,5 @@
 import pygame,random
-#coments should consist of, what does this do, why is it here, when is it used
+#comments should consist of, what does this do, why is it here, when is it used
 pygame.init()
 X = 1000
 Y = 1000
