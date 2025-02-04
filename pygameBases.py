@@ -10,10 +10,17 @@ def colorize(image, new_color):
 def resize(img,w,h):
     return pygame.transform.scale(img,(w,h))
 #rotate an image
-def rot90(img,r=-1):
-    if r==-1:
-        r=random.randint(0,3)*90
-    return pygame.transform.rotate(img,r)
+def rot90(img,r):
+    # if r==-1:
+    #     r=random.randint(0,3)*90
+    return pygame.transform.rotate(img,r*90)
+def rotate_image(image, angle):
+    orig_rect = image.get_rect()
+    rot_image = pygame.transform.rotate(image, angle)
+    rot_rect = orig_rect.copy()
+    rot_rect.center = rot_image.get_rect().center
+    rot_image = rot_image.subsurface(rot_rect).copy()
+    return rot_image
 #create a rectanngle
 def rect(screen,x,y,w,h,col=(255,255,255)):
     # print(col)
