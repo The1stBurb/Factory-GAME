@@ -13,16 +13,17 @@ font = pygame.font.SysFont(None, 10)
 #runs SFX duh
 class SFXRunner:
     def __init__(self):
-        self.ambient=[pygame.mixer.Sound('sfx\\back1.wav'),pygame.mixer.Sound('sfx\\back2.wav'),pygame.mixer.Sound('sfx\\back3.wav'),
-                      pygame.mixer.Sound('sfx\\back4.wav'),pygame.mixer.Sound('sfx\\back5.wav'),pygame.mixer.Sound('sfx\\back6.wav'),]
-        self.ambOn=random.random(0,len(self.ambient)-1)
+        self.ambient=['sfx\\back1.wav','sfx\\back2.wav','sfx\\back3.wav','sfx\\back4.wav','sfx\\back5.wav','sfx\\back6.wav',]
+        self.ambOn=random.randint(0,len(self.ambient)-1)
         # self.msOnClk=pygame.mixer.Sound('sound_file.wav')
         # self.msYes=pygame.mixer.Sound('sound_file.wav')
         # self.msNo=pygame.mixer.Sound('sound_file.wav')
     def runAmb(self):
         if not pygame.mixer.music.get_busy():
-            self.ambOn=random.random(0,len(self.ambient)-1)
-            self.ambient[self.ambOn].play()
+            self.ambOn=random.randint(0,len(self.ambient)-1)
+            pygame.mixer.music.load(self.ambient[self.ambOn])
+            pygame.mixer.music.play()
+            print(self.ambient[self.ambOn])
 sfx=SFXRunner()
 #size of images
 sz=100
@@ -52,12 +53,15 @@ drag=False
 while True:
     screen.fill((200,200,200))
     # mbt=1
+    keys=pygame.key.get_pressed()
     pms=ms.copy()
     ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             # print(clickclack)
             quit()
+        elif i.type==pygame.KEYDOWN and i.key==pygame.K_RIGHT:
+            pygame.mixer.music.stop()
     buttons = pygame.mouse.get_pressed()
     #this is drag
     if buttons[2]:
