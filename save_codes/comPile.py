@@ -1,14 +1,11 @@
-from random import choice
-from math import sqrt
+# from random import choice
+# from math import sqrt
 pile=[
-    6i1-d;
-=j,stz
-y\'wg]
-f3`2k7
-q4vr9b
-o85h.a
-umxcl0
-/[enp
+# "12345asdf",
+# "67890ghjk",
+# "-=qwel;'v",
+# "rtyuizxcb",
+# "op[]\\nm,./",
     ["0","5","4",")","e","z","",],
     ["1","2","3","(","f","y",],
     ["9","6","[","]","g","x",],
@@ -17,6 +14,7 @@ umxcl0
     ["n","m","l","k","j","u",],
     ["o","p","q","r","s","t",],
 ]
+# caps={"!":"1","@":"2","#":"3","":"","":"","":"","":"","":"","":"","":"","":"","":"","":"","":"","":"","":"","":"",""}
 def inPile(digit):
     global pile
     for y,i in enumerate(pile):
@@ -53,14 +51,14 @@ def runPiler(txt=""):
             save.write(save2)
 # print(runPiler())#"[0, (1360, None)]"))
 # runPiler([4,(None,None),[]])
-ltrs="`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
-pl=0#len(ltrs)
-for i in range(len(ltrs)):
-    ch=choice(ltrs)
-    ltrs=ltrs.replace(ch,"")
-    print(ch,end="")
-    pl+=1
-    if pl>5:
-        pl=0
-        print()
-print()
+# ltrs="`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
+# pl=0#len(ltrs)
+# for i in range(len(ltrs)):
+#     ch=choice(ltrs)
+#     ltrs=ltrs.replace(ch,"")
+#     print(ch,end="")
+#     pl+=1
+#     if pl>5:
+#         pl=0
+#         print()
+# print()
