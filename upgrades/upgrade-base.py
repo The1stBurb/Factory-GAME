@@ -24,9 +24,6 @@ items(["Cu"],"CuRod",0,False),
 items(["CuPlate"],"Wire",0,False),
 items(["LightOil","CuPlate"],"AdvWire",0,False),
 items(["HeavyOil","CuPlate"],"UltWire",0,False),
-items([""],"TimeWarp",0,False),
-items([""],"",0,False),
-items([""],"",0,False),
 
 items([],"FeOre",0,True),
 items(["FeOre"],"Fe",0,False),
@@ -49,7 +46,6 @@ items([""],"CircuitVIII",0,False),
 items([""],"CircuitIX",0,False),
 items([""],"CircuitX",0,False),
 items([""],"Circuit8",0,False),
-items([""],"EndGame",0,False),
 
 items([],"Oil",0,True),
 items(["Oil"],"HeavyOil",0,False),
@@ -68,28 +64,6 @@ items(["RealityCrystal"],"RealityAshes",0,False),
 
 items([],"H2O",0,True),
 items([""],"Fluids",0,False),
-
-items([""],"LogicI",0,False),
-items([""],"LogicII",0,False),
-items([""],"LogicIII",0,False),
-
-
-items([""],"Teleport",0,False),
-
-items([""],"BetterPower",0,False),
-items([""],"EvenBetterPower",0,False),
-items([""],"NuclearPower",0,False),
-items([""],"MagicPower",0,False),
-items([""],"FracturedPower",0,False),
-
-items([""],"ImpResearch",0,False),
-items([""],"NuclearResearch",0,False),
-
-items([""],"Ads?",0,False),
-items([""],"Ads++?",0,False),
-items([""],"CircuitReligion?",0,False),
-items([""],"BrainWash?",0,False),
-items([""],"Stocks?",0,False),
 ]
 
 
@@ -149,22 +123,22 @@ circuit8_5Unlocked = False
 highestCircuitLoopUnlocked = 10
 
 #even more endgame items:
-# reallyBigUpgradeThatEndsTheGameUnlocked = False
-# logistics1Unlocked = False
-# logistics2Unlocked = False
-# logistics3Unlocked = False
-# teleportersUnlocked = False
+reallyBigUpgradeThatEndsTheGameUnlocked = False
+logistics1Unlocked = False
+logistics2Unlocked = False
+logistics3Unlocked = False
+teleportersUnlocked = False
 
 #upgrades:
-# betterPowerUnlocked = False
-# evenBetterPowerUnlocked = False
+betterPowerUnlocked = False
+evenBetterPowerUnlocked = False
 americaPowerUnlocked = False
-# nuclearPowerUnlocked = False
-# magicPowerUnlocked = False
-# fracturedPowerUnlocked = False
-# improvedResearchUnlocked = False
-# nuclearResearchUnlocked = False
-# timeWarpUnlocked = False
+nuclearPowerUnlocked = False
+magicPowerUnlocked = False
+fracturedPowerUnlocked = False
+improvedResearchUnlocked = False
+nuclearResearchUnlocked = False
+timeWarpUnlocked = False
 advertisingUnlocked = False
 superAdvertisingUnlocked = False
 circuitBasedReligionUnlocked = False
