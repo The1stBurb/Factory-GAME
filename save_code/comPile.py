@@ -39,15 +39,15 @@ def decomPile(txt):
         dig1,dig2,dig3=int(chnk[0]),int(chnk[1]),int(chnk[2])
         decompiled+=(pile[dig2][dig3]if dig1==0 else pile[dig2][dig3].upper())
     return decompiled
-def runPiler(txt=""):
+def runPiler(fileNum,txt=""):
     if txt=="":
         saved=""
-        with open("save_code/save.pile","r") as save:
+        with open(f"save_code/save{fileNUm}.pile","r") as save:
             saved=save.read()
         return decomPile(saved)
     else:
         save2=comPile(txt)
-        with open("save_code/save.pile","w")as save:
+        with open(f"save_code/save{fileNum}.pile","w")as save:
             save.write(save2)
 # print(runPiler())#"[0, (1360, None)]"))
 # runPiler([4,(None,None),[]])
