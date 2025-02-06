@@ -3,13 +3,13 @@ from building_code.base import Building
 class Belt(Building):
     def __init__(self,x,y):
         super().__init__(x,y)
+        self.beltSides=[2,2,2,2]
         self.time=time.time()
         self.inv=[]
         self.maxinv=4
         self.complete=[]
         self.maxcomp=4
         self.type="belt"
-
     def tick(self):
         if time.time()-self.time>1:
             self.time=time.time()

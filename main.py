@@ -123,7 +123,7 @@ while True:
         for x,j in enumerate(i):
             pb.rect(screen,x*sz+grd[0],y*sz+grd[1],sz,sz,width=2)
             if j!=0:
-                pb.image(screen,j.img,j.x*sz+grd[0],j.y*sz+grd[1]-(j.img.get_height()-sz))
+                pb.image(screen,j.disp,j.x*sz+grd[0],j.y*sz+grd[1]-(j.disp.get_height()-sz))
             # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
     pygame.display.flip()
 

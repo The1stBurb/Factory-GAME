@@ -36,6 +36,7 @@ class CuCond(Building):
 #         self.maxinv=
 #         self.complete=[]
 #         self.maxcomp=
+#         self.type="building"
 
 #     def tick(self):
 #         if time.time()-self.time>1:
