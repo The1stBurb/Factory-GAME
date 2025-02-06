@@ -165,7 +165,6 @@ def start():
         screen.blit(creditBtn,(cdx,cdy))
         pygame.display.flip()
 while True:
-<<<<<<< HEAD
     action="start"#start()
     match action:
         case "start":
@@ -174,65 +173,3 @@ while True:
             pass
         case "saves":
             pass
-=======
-    screen.fill((200,200,200))
-    # mbt=1
-    pbtn=buttons
-    buttons = pygame.mouse.get_pressed()
-    keys=pygame.key.get_pressed()
-    pms=ms.copy()
-    ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
-    for i in pygame.event.get():
-        if i.type == pygame.QUIT:
-            # print(clickclack)
-            quit()
-        elif i.type==pygame.KEYDOWN and i.key==pygame.K_RIGHT:
-            pygame.mixer.music.stop()
-    if keys[n0]:
-        types=0
-    elif keys[n1]:
-        types=1
-    #this is drag
-    if buttons[2]:
-        grd=[grd[0]+(ms[0]-pms[0]),grd[1]+(ms[1]-pms[1])]
-        drag=True
-    elif drag:
-        drag=False
-    #set - unecesary
-    elif buttons[0] and not pbtn[0]:
-        rx=(ms[0]-grd[0])//sz
-        ry=(ms[1]-grd[1])//sz
-        # grid[ry][rx]=f"belt{len(belts)}"
-        if types==0:
-            sides=[None,None,None,None]
-            opposite={1:3,2:4,3:1,4:2}
-            for x,dirs in enumerate((0,-1),(-1,0),(0,1),(1,0)):
-                if grid[ry+dirs[0]][rx+dirs[1]]!=0:
-                    if grid[ry+dirs[0]][rx+dirs[1]].type=="belt":
-                        sides[x]="out"
-                    elif grid[ry+dirs[0]][rx+dirs[1]].type=="belt" and opposite[x] in grid[ry+dirs[0]][rx+dirs[1]].indirs:
-                        pass#too many thinking i'll come back later
-
-            grid[ry][rx]=belt.Belt(rx,ry)
-        elif types==1:
-            grid[ry][rx]=build.CuCond(rx,ry,imgs["CuCond"])
-        grid[ry][rx].buildImg(grid,beltIn,beltOut)
-        
-        # print(grid[ry][rx][:-1])
-    #     belts.append(belt(rx,ry,1 if ry>0 and "belt"in grid[ry-1][rx] else 0,1 if rx<len(grid[ry])-1 and "belt"in grid[ry][rx+1] else 0,1 if ry<len(grid)-1 and "belt"in grid[ry+1][rx] else 0,1 if rx>0 and "belt"in grid[ry][rx-1] else 0,))
-    #     for i in range(len(belts)):
-    #         if math.sqrt((rx-belts[i].x)**2+(ry-belts[i].y)**2)<2:
-    #             belts[i].img=belts[i].buildImg(1 if belts[i].y>0 and "belt"in grid[belts[i].y-1][belts[i].x] else 0,1 if belts[i].x<len(grid[belts[i].y])-1 and "belt"in grid[belts[i].y][belts[i].x+1] else 0,1 if belts[i].y<len(grid)-1 and "belt"in grid[belts[i].y+1][belts[i].x] else 0,1 if belts[i].x>0 and "belt"in grid[belts[i].y][belts[i].x-1] else 0,)
-    # for blt in belts:
-    #     blt.disp()
-    # #display grid
-    for y,i in enumerate(grid):
-        for x,j in enumerate(i):
-            pb.rect(screen,x*sz+grd[0],y*sz+grd[1],sz,sz,width=2)
-            if j!=0:
-                pb.image(screen,j.disp,j.x*sz+grd[0],j.y*sz+grd[1]-(j.disp.get_height()-sz))
-            # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
-    pygame.display.flip()
-
-    sfx.runAmb()
->>>>>>> 368885222c1a032c2c0a633ffb88c49f0cb709b9
