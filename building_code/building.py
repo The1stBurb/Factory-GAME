@@ -9,6 +9,7 @@ class CuCond(Building):
         self.maxinv=4
         self.complete=[]
         self.maxcomp=4
+        self.type="building"
 
     def tick(self):
         if time.time()-self.time>1:

@@ -43,13 +43,13 @@ beltIn=pb.imgGit("img\\belts\\in.png",sz,sz)
 beltOut=pb.imgGit("img\\belts\\out.png",sz,sz)
 items=[item("img\\items\\RawCu.png","Raw Copper",0.50,0),item("img\\items\\RefinedCu.png","Refined Copper",1.50,1),]
 #list of image for ease of use and stuff lol
-imgs=[]#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
+imgs={}#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
 #raw for easy convert
 rawImg={"building":["CuCond","FeCond","Sell"]}
 #raw to img convert1
 for i in rawImg:
     for j in rawImg[i]:
-        imgs.append(pb.imgGit(f"img\\{i}\\{j}.png",sz,sz),)
+        imgs[j]=pb.imgGit(f"img\\{i}\\{j}.png",sz,sz)
 #grid of blocks
 grid=[]
 #self explanitory
@@ -101,7 +101,7 @@ while True:
         if types==0:
             grid[ry][rx]=belt.Belt(rx,ry)
         elif types==1:
-            grid[ry][rx]=build.CuCond(rx,ry)
+            grid[ry][rx]=build.CuCond(rx,ry,imgs["CuCond"])
         grid[ry][rx].buildImg(grid,beltIn,beltOut)
         if ry>0 and grid[ry-1][rx]!=0:
             grid[ry-1][rx].buildImg(grid,beltIn,beltOut)
@@ -123,7 +123,7 @@ while True:
         for x,j in enumerate(i):
             pb.rect(screen,x*sz+grd[0],y*sz+grd[1],sz,sz,width=2)
             if j!=0:
-                pb.image(screen,j.img,x*sz+grd[0],y*sz+grd[1])
+                pb.image(screen,j.img,j.x*sz+grd[0],j.y*sz+grd[1]-(j.img.get_height()-sz))
             # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
     pygame.display.flip()
 

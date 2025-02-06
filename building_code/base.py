@@ -11,7 +11,6 @@ class Building:
         # first slot in input, second is output
         self.inv=[None,None]
         self.img=None#pygame.Surface((sz,sz),pygame.SRCALPHA)
-    
     def tick(self,speed):
         #speed is how often to "craft"
         if time.time()-self.time>speed:
@@ -27,13 +26,13 @@ class Building:
             left=1
         if self.x<len(grid[self.y])-1 and grid[self.y][self.x+1]!=0:
             right=1
-        blankSrfce=pygame.Surface((sz,sz),pygame.SRCALPHA)
-        if self.img!=None:
-            blankSrfce.blit(self.img,(0,0))
+        blankSrfce=pygame.Surface((sz,sz*1.5 if self.img!=None else sz),pygame.SRCALPHA)
         for rot,i in enumerate([up,left,down,right]):
             if i==1:
-                blankSrfce.blit(pb.rotate_image(beltIn,(rot-1)*90),(-1 if rot==2 else 0,-1 if rot==1 else 0))
+                blankSrfce.blit(pb.rotate_image(beltIn,(rot-1)*90),(-1 if rot==2 else 0,(-1 if rot==1 else 0)+(sz/2 if self.img!=None else 0)))
             elif i==2:
-                blankSrfce.blit(pb.rotate_image(beltOut,(rot-1)*90),(-1 if rot==2 else 0,-1 if rot==1 else 0))
+                blankSrfce.blit(pb.rotate_image(beltOut,(rot-1)*90),(-1 if rot==2 else 0,(-1 if rot==1 else 0)+(sz/2 if self.img!=None else 0)))
         self.beltSides=[up,right,down,left]
+        if self.img!=None:
+            blankSrfce.blit(self.img,(0,0))
         self.img=blankSrfce
