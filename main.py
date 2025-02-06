@@ -63,8 +63,7 @@ def setup():
 #Checks all the buildings
 def tick(buildings):
     for building in buildings:
-        pass
-        #tickingfunction
+        pass#building.tick()
 setup()
 ms=[0,0]#mouse
 grd=[0,0]#the offset made by panning the screen
