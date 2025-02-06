@@ -1,21 +1,43 @@
 import time
 from building_code.base import Building
 class Belt(Building):
-    def __init__(self,x,y):
+    def __init__(self,x,y,sides):
         super().__init__(x,y)
-        self.beltSides=[2,2,2,2]
+
+        self.outdirs=[]
+        self.indirs=[]
+        for x,side in enumerate(sides):
+            if side=="in":
+                self.indirs.append(x+1)
+            elif side=="out":
+                self.outdirs.append(x+1)
+
+        self.currentchoice=0#for round robin purposes
+
         self.time=time.time()
         self.inv=[]
         self.maxinv=4
         self.complete=[]
         self.maxcomp=4
         self.type="belt"
-    def tick(self):
+    def tick(self,adjacents):
         if time.time()-self.time>1:
             self.time=time.time()
             self.craft()
         if len(self.complete)>0:
-            return (1,0)
+            try:
+                vector={1:(0,-1),2:(-1,0),3:(0,1),4:(1,0)}
+                opposite={1:3,2:4,3:1,4:2}
+                chosendir=[]
+                for dirs in self.outdirs:
+                    if opposite[dirs] in adjacents[dirs].indirs:
+                        chosendir.append(dirs)
+                
+
+                self.currentchoice+=1
+                return vector[chosendir[self.currentchoice%len(chosendir)]]
+            except:
+                return False
         else:
             return False
     

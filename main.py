@@ -99,18 +99,20 @@ while True:
         ry=(ms[1]-grd[1])//sz
         # grid[ry][rx]=f"belt{len(belts)}"
         if types==0:
+            sides=[None,None,None,None]
+            opposite={1:3,2:4,3:1,4:2}
+            for x,dirs in enumerate((0,-1),(-1,0),(0,1),(1,0)):
+                if grid[ry+dirs[0]][rx+dirs[1]]!=0:
+                    if grid[ry+dirs[0]][rx+dirs[1]].type=="belt":
+                        sides[x]="out"
+                    elif grid[ry+dirs[0]][rx+dirs[1]].type=="belt" and opposite[x] in grid[ry+dirs[0]][rx+dirs[1]].indirs:
+                        pass#too many thinking i'll come back later
+
             grid[ry][rx]=belt.Belt(rx,ry)
         elif types==1:
             grid[ry][rx]=build.CuCond(rx,ry,imgs["CuCond"])
         grid[ry][rx].buildImg(grid,beltIn,beltOut)
-        if ry>0 and grid[ry-1][rx]!=0:
-            grid[ry-1][rx].buildImg(grid,beltIn,beltOut)
-        if ry<len(grid)-1 and grid[ry+1][rx]!=0:
-            grid[ry+1][rx].buildImg(grid,beltIn,beltOut)
-        if rx>0 and grid[ry][rx-1]!=0:
-            grid[ry][rx-1].buildImg(grid,beltIn,beltOut)
-        if rx<len(grid[ry])-1 and grid[ry][rx+1]!=0:
-            grid[ry][rx+1].buildImg(grid,beltIn,beltOut)
+        
         # print(grid[ry][rx][:-1])
     #     belts.append(belt(rx,ry,1 if ry>0 and "belt"in grid[ry-1][rx] else 0,1 if rx<len(grid[ry])-1 and "belt"in grid[ry][rx+1] else 0,1 if ry<len(grid)-1 and "belt"in grid[ry+1][rx] else 0,1 if rx>0 and "belt"in grid[ry][rx-1] else 0,))
     #     for i in range(len(belts)):
