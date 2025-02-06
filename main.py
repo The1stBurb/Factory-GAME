@@ -46,20 +46,25 @@ items=[item("img\\items\\RawCu.png","Raw Copper",0.50,0),item("img\\items\\Refin
 imgs={}#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
 #raw for easy convert
 rawImg={"building":["CuCond","FeCond","Sell"]}
-#raw to img convert1
+#raw to img convert
 for i in rawImg:
     for j in rawImg[i]:
         imgs[j]=pb.imgGit(f"img\\{i}\\{j}.png",sz,sz)
 #grid of blocks
 grid=[]
 #self explanitory
-def buildGrid(widh,high):
+def buildGrid(width,high):
     global grid
-    for i in range(widh):
-        grid.append([0 for j in range(widh)])
+    for i in range(width):
+        grid.append([0 for j in range(width)])
 #anything in that is "setup" goes here
 def setup():
     buildGrid(50,50)
+#Checks all the buildings
+def tick(buildings):
+    for building in buildings:
+        pass
+        #tickingfunction
 setup()
 ms=[0,0]#mouse
 grd=[0,0]#the offset made by panning the screen
@@ -164,6 +169,7 @@ def start():
         screen.blit(savesBtn,(svx,svy))
         screen.blit(creditBtn,(cdx,cdy))
         pygame.display.flip()
+        
 while True:
     action="start"#start()
     match action:
