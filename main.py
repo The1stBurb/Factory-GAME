@@ -14,6 +14,10 @@ screen = pygame.display.set_mode((X, Y),pygame.RESIZABLE)#,pygame.FULLSCREEN)
 clk=pygame.time.Clock()
 pygame.font.init()
 font = pygame.font.SysFont(None, 10)
+#for updating with upgrades
+moneyScaler = 1
+cuCondScaler = 1
+beltSpeedScaler = 1
 #runs SFX duh
 class SFXRunner:
     def __init__(self):
