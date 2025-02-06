@@ -20,8 +20,8 @@ class Belt(Building):
         self.complete=[]
         self.maxcomp=4
         self.type="belt"
-    def tick(self,adjacents):
-        if time.time()-self.time>1:
+    def tick(self,adjacents,speed=1):
+        if time.time()-self.time>speed:
             self.time=time.time()
             self.craft()
         if len(self.complete)>0:
