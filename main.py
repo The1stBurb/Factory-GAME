@@ -71,9 +71,7 @@ def setup():
 def tick(buildings):
     pass
     for building in buildings:
-        if isInstance(building,belt.Belt):
-            building.tick(beltSpeedScaler)
-        elif isInstance(building,build.CuCond):
+        if isInstance(building,build.CuCond):
             building.tick(cuCondScaler)
 setup()
 ms=[0,0]#mouse
