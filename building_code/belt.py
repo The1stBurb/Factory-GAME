@@ -1,7 +1,8 @@
 import time
-from base import Building
+from building_code.base import Building
 class Belt(Building):
-    def __init__(self):
+    def __init__(self,x,y):
+        super().__init__(x,y)
         self.time=time.time()
         self.inv=[]
         self.maxinv=4

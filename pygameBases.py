@@ -22,9 +22,9 @@ def rotate_image(image, angle):
     rot_image = rot_image.subsurface(rot_rect).copy()
     return rot_image
 #create a rectanngle
-def rect(screen,x,y,w,h,col=(255,255,255)):
+def rect(screen,x,y,w,h,col=(255,255,255),width=0):
     # print(col)
-    pygame.draw.rect(screen, col, pygame.Rect(x, y, w, h))
+    pygame.draw.rect(screen, col, pygame.Rect(x, y, w, h),width)
 #write text
 def text(screen,font,txt,x,y,col=(0,0,0)):
     screen.blit(font.render(txt, True, col),(x,y))
