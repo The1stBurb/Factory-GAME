@@ -15,6 +15,9 @@ clk=pygame.time.Clock()
 pygame.font.init()
 font = pygame.font.SysFont(None, 10)
 #for updating with upgrades
+global moneyScaler
+global cuCondScaler
+global beltSpeedScaler
 moneyScaler = 1
 cuCondScaler = 1
 beltSpeedScaler = 1
@@ -66,8 +69,10 @@ def setup():
     buildGrid(50,50)
 #Checks all the buildings
 def tick(buildings):
+    pass
     for building in buildings:
-        pass#building.tick()
+        if isInstance(building,Belt):
+            pass
 setup()
 ms=[0,0]#mouse
 grd=[0,0]#the offset made by panning the screen
