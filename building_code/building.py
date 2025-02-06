@@ -38,8 +38,8 @@ class CuCond(Building):
 #         self.maxcomp=
 #         self.type="building"
 
-#     def tick(self):
-#         if time.time()-self.time>1:
+#     def tick(self,speed=1):
+#         if time.time()-self.time>speed:
 #             self.time=time.time()
 #             self.craft()
 #         if len(self.complete)>0:
