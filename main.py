@@ -204,6 +204,9 @@ while True:
                 if not isinstance(square,int):
                     if opposite[sidenum+1] in square.outdirs:
                         sides[sidenum]="in"
+                    elif sidenum==opposite[rotion]-1 and square.type=="belt" and not sidenum+1 in square.outdirs:
+                        square.outdirs.append(sidenum+1)
+                        square.refresh_image(beltimgs,error)
             sides[rotion-1]="out"
             if not "in" in sides:
                 sides[opposite[rotion]-1]="in"

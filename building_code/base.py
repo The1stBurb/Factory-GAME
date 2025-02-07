@@ -3,6 +3,8 @@ import pygameBases as pb
 import pygame
 sz=100
 #This is the parent class for buildings to inheret from, for ease of use
+#use belt as an example instead ##################!!!!!!!!!!!!!!!
+"""
 class Building:
     def __init__(self,x,y):
         self.x,self.y=x,y
@@ -41,3 +43,4 @@ class Building:
             blankSrfce.blit(pb.imgGit("img\\building\\base.png",sz,sz),(0,sz/2))
             blankSrfce.blit(self.img,(0,0))
         self.disp=blankSrfce
+"""

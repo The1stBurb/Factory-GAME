@@ -1,12 +1,15 @@
 import time
-from building_code.base import Building
-class CuCond(Building):
+
+class CuCond:
     def __init__(self,x,y,baseImg):
-        super().__init__(x,y)
-        self.img=baseImg
+        self.x=x
+        self.y=y
+        self.image=baseImg
         self.time=time.time()
+        self.outdirs=[1,2,3,4]
+        self.indirs=[]
         self.inv=[]
-        self.maxinv=4
+        self.maxinv=0
         self.complete=[]
         self.maxcomp=4
         self.type="building"

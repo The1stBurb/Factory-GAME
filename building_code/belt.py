@@ -1,9 +1,9 @@
 import time
-from building_code.base import Building
-class Belt(Building):
-    def __init__(self,x,y,sides,image):
-        super().__init__(x,y)
 
+class Belt:
+    def __init__(self,x,y,sides,image):
+        self.x=x
+        self.y=y
         self.outdirs=[]
         self.indirs=[]
         for x,side in enumerate(sides):
@@ -49,3 +49,15 @@ class Belt(Building):
     def use(self,other):
         if len(other.inv)<other.maxinv:
             other.inv.append(self.complete.pop(0))
+    
+    def refresh_image(self,beltimgs,error):
+        sides=[None,None,None,None]
+        for i in self.outdirs:
+            sides[i-1]="out"
+        for i in self.indirs:
+            sides[i-1]="in"
+        print(sides)
+        try:
+            self.image=beltimgs[sides]
+        except:
+            self.image=error
