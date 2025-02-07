@@ -1,7 +1,7 @@
 import time
 from building_code.base import Building
 class Belt(Building):
-    def __init__(self,x,y,sides):
+    def __init__(self,x,y,sides,image):
         super().__init__(x,y)
 
         self.outdirs=[]
@@ -20,6 +20,7 @@ class Belt(Building):
         self.complete=[]
         self.maxcomp=4
         self.type="belt"
+        self.image=image
     def tick(self,adjacents,speed=1):
         if time.time()-self.time>speed:
             self.time=time.time()

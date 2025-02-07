@@ -44,11 +44,21 @@ class item:
         self.price=price
         self.idd=idd
 #size of images
+error=pb.imgGit("img\\error.png",sz,sz)
 beltIn=pb.imgGit("img\\belts\\in.png",sz,sz)
 beltOut=pb.imgGit("img\\belts\\out.png",sz,sz)
 beltIn=pb.imgGit("img\\belts\\in.png",sz,sz)
 beltOut=pb.imgGit("img\\belts\\out.png",sz,sz)
 items=[item("img\\items\\RawCu.png","Raw Copper",0.50,0),item("img\\items\\RefinedCu.png","Refined Copper",1.50,1),]
+#at first glance this may seem ineffecient, but we have to load each image anyway
+beltimgs={(None,"out",None,"in"):pb.imgGit("img\\belts\\belth11.png",sz,sz),
+          (None,"in",None,"out"):pygame.transform.flip(pb.imgGit("img\\belts\\belth11.png",sz,sz),True,False),
+          ("out",None,"in",None):pb.imgGit("img\\belts\\beltv11.png",sz,sz),
+          ("in",None,"out",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltv11.png",sz,sz),False,True),
+          ("in","out",None,None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,True),
+          (None,"out","in",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,False),
+          (None,None,"in","out"):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),True,False),
+          ("out",None,None,"in"):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),True,True)}
 #list of image for ease of use and stuff lol
 imgs={}#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
 #raw for easy convert
@@ -58,7 +68,7 @@ for i in rawImg:
     for j in rawImg[i]:
         imgs[j]=pb.imgGit(f"img\\{i}\\{j}.png",sz,sz)
 #grid of blocks
-grid=[]
+
 #self explanitory
 def buildGrid(width,high):
     global grid
@@ -71,83 +81,8 @@ def setup():
 def tick(buildings):
     pass
     for building in buildings:
-        if isInstance(building,build.CuCond):
+        if isinstance(building,build.CuCond):
             building.tick(cuCondScaler)
-setup()
-ms=[0,0]#mouse
-grd=[0,0]#the offset made by panning the screen
-pms=[0,0]#past mouse for dragging
-drag=False
-buttons=[False,False,False]
-types=0
-up,right,down,left=pygame.K_UP,pygame.K_RIGHT,pygame.K_DOWN,pygame.K_LEFT
-n1,n2,n3,n4,n5,n6,n7,n8,n9,n0=pygame.K_1,pygame.K_2,pygame.K_3,pygame.K_4,pygame.K_5,pygame.K_6,pygame.K_7,pygame.K_8,pygame.K_9,pygame.K_0
-place=1#False
-toPlace=[]
-def main():
-    global grid,ms,grd,pms,drag,buttons,types,up,right,down,left,n1,n2,n3,n4,n5,n6,n7,n8,n9,n0,place,toPlace
-    while True:
-        screen.fill((200,200,200))
-        # mbt=1
-        pbtn=buttons
-        buttons = pygame.mouse.get_pressed()
-        keys=pygame.key.get_pressed()
-        pms=ms.copy()
-        ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
-        for i in pygame.event.get():
-            if i.type == pygame.QUIT:
-                print(toPlace)
-                quit()
-            elif i.type==pygame.KEYDOWN and i.key==pygame.K_RIGHT:
-                pygame.mixer.music.stop()
-        if keys[n0]:
-            types=0
-        elif keys[n1]:
-            types=1
-        #this is drag
-        if buttons[2]:
-            grd=[grd[0]+(ms[0]-pms[0]),grd[1]+(ms[1]-pms[1])]
-            drag=True
-        elif drag:
-            drag=False
-        elif buttons[0] and not pbtn[0]:
-            if place==False:
-                rx=(ms[0]-grd[0])//sz
-                ry=(ms[1]-grd[1])//sz
-                # grid[ry][rx]=f"belt{len(belts)}"
-                if types==0:
-                    grid[ry][rx]=belt.Belt(rx,ry)
-                elif types==1:
-                    grid[ry][rx]=build.CuCond(rx,ry,imgs["CuCond"])
-                grid[ry][rx].buildImg(grid,beltIn,beltOut)
-                if ry>0 and grid[ry-1][rx]!=0:
-                    grid[ry-1][rx].buildImg(grid,beltIn,beltOut)
-                if ry<len(grid)-1 and grid[ry+1][rx]!=0:
-                    grid[ry+1][rx].buildImg(grid,beltIn,beltOut)
-                if rx>0 and grid[ry][rx-1]!=0:
-                    grid[ry][rx-1].buildImg(grid,beltIn,beltOut)
-                if rx<len(grid[ry])-1 and grid[ry][rx+1]!=0:
-                    grid[ry][rx+1].buildImg(grid,beltIn,beltOut)
-        if place==1:
-            rx=(ms[0]-grd[0])//sz
-            ry=(ms[1]-grd[1])//sz
-            prx=(pms[0]-grd[0])//sz
-            pry=(pms[1]-grd[1])//sz
-            if [rx,ry]!=[prx,pry] and [rx,ry]in toPlace and toPlace.index([rx,ry])==len(toPlace)-2:
-                toPlace.remove([rx,ry])
-            elif [rx,ry]!=[prx,pry]and math.sqrt((prx-rx)**2+(pry-ry)**2)<2:
-                toPlace.append([rx,ry])
-                # print(rx,ry,math.sqrt((prx-rx)**2+(pry-ry)**2))
-        for y,i in enumerate(grid):
-            for x,j in enumerate(i):
-                pb.rect(screen,x*sz+grd[0],y*sz+grd[1],sz,sz,width=2)
-                if j!=0:
-                    pb.image(screen,j.disp,j.x*sz+grd[0],j.y*sz+grd[1]-(j.disp.get_height()-sz))
-                # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
-        for i in toPlace[:-1]:
-            pb.rect(screen,i[0]*sz+grd[0],i[1]*sz+grd[0],sz,sz,col=(0,0,0))
-        pygame.display.flip()
-        sfx.runAmb()
 titleBtn=pb.imgGit("img\\other\\title_screen\\title.png",730,110)
 creditBtn=pb.imgGit("img\\other\\title_screen\\credits.png",380,90)
 startBtn=pb.imgGit("img\\other\\title_screen\\start.png",300,90)
@@ -177,13 +112,95 @@ def start():
         screen.blit(savesBtn,(svx,svy))
         screen.blit(creditBtn,(cdx,cdy))
         pygame.display.flip()
-        
+
+
+
+grid=[]
+setup()
+ms=[0,0]#mouse
+grd=[0,0]#the offset made by panning the screen
+pms=[0,0]#past mouse for dragging
+drag=False
+buttons=[False,False,False]
+types=0
+up,right,down,left=pygame.K_UP,pygame.K_RIGHT,pygame.K_DOWN,pygame.K_LEFT
+n1,n2,n3,n4,n5,n6,n7,n8,n9,n0=pygame.K_1,pygame.K_2,pygame.K_3,pygame.K_4,pygame.K_5,pygame.K_6,pygame.K_7,pygame.K_8,pygame.K_9,pygame.K_0
+place=1#False
+toPlace=[]
+rotion=1#rotation used for placing buildings
+
+keydown=False#to prevent double key presses for holding a key
 while True:
-    action="start"#start()
-    match action:
-        case "start":
-            main()
-        case "credits":
-            pass
-        case "saves":
-            pass
+    screen.fill((200,200,200))
+    # mbt=1
+    pbtn=buttons
+    buttons = pygame.mouse.get_pressed()
+    keys=pygame.key.get_pressed()
+    pms=ms.copy()
+    ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            print(toPlace)
+            quit()
+        elif i.type==pygame.KEYDOWN and i.key==pygame.K_RIGHT:
+            pygame.mixer.music.stop()
+    if keys[n0]:
+        types=0
+    elif keys[n1]:
+        types=1
+    elif keys[pygame.K_r]:
+        if not keydown:
+            rotion+=1
+            if rotion>4:rotion=1
+        keydown=True
+    else:
+        keydown=False
+    #this is drag
+    if buttons[2]:
+        grd=[grd[0]+(ms[0]-pms[0]),grd[1]+(ms[1]-pms[1])]
+        drag=True
+    elif drag:
+        drag=False
+    elif buttons[0]:
+        
+        rx=(ms[0]-grd[0])//sz
+        ry=(ms[1]-grd[1])//sz
+        # grid[ry][rx]=f"belt{len(belts)}"
+        if types==0:
+            sides=[None,None,None,None]
+            opposite={1:3,2:4,3:1,4:2}
+            for sidenum,side in enumerate(((0,-1),(1,0),(0,1),(-1,0))):
+                square=grid[ry+side[1]][rx+side[0]]
+                if not isinstance(square,int):
+                    if opposite[sidenum+1] in square.outdirs:
+                        sides[sidenum]="in"
+                    print(square.outdirs,opposite[sidenum+1])
+            sides[rotion-1]="out"
+            print(sides)
+            if not "in" in sides:
+                sides[opposite[rotion]-1]="in"
+            try:
+                grid[ry][rx]=belt.Belt(rx,ry,sides,beltimgs[tuple(sides)])
+            except:
+                grid[ry][rx]=belt.Belt(rx,ry,sides,error)
+        elif types==1:
+            grid[ry][rx]=build.CuCond(rx,ry,imgs["CuCond"])
+        
+    if place==1:
+        rx=(ms[0]-grd[0])//sz
+        ry=(ms[1]-grd[1])//sz
+        prx=(pms[0]-grd[0])//sz
+        pry=(pms[1]-grd[1])//sz
+        if [rx,ry]!=[prx,pry] and [rx,ry]in toPlace and toPlace.index([rx,ry])==len(toPlace)-2:
+            toPlace.remove([rx,ry])
+        elif [rx,ry]!=[prx,pry]and math.sqrt((prx-rx)**2+(pry-ry)**2)<2:
+            toPlace.append([rx,ry])
+            # print(rx,ry,math.sqrt((prx-rx)**2+(pry-ry)**2))
+    for y,i in enumerate(grid):
+        for x,j in enumerate(i):
+            pb.rect(screen,x*sz+grd[0],y*sz+grd[1],sz,sz,width=2)
+            if j!=0:
+                pb.image(screen,j.image,j.x*sz+grd[0],j.y*sz+grd[1])
+            # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
+    pygame.display.flip()
+    sfx.runAmb()
