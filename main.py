@@ -55,6 +55,7 @@ beltimgs={(None,"out",None,"in"):pb.imgGit("img\\belts\\belth11.png",sz,sz),
           (None,"in",None,"out"):pygame.transform.flip(pb.imgGit("img\\belts\\belth11.png",sz,sz),True,False),
           ("out",None,"in",None):pb.imgGit("img\\belts\\beltv11.png",sz,sz),
           ("in",None,"out",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltv11.png",sz,sz),False,True),
+
           ("in","out",None,None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,True),
           (None,"out","in",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,False),
           (None,None,"in","out"):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),True,False),
@@ -63,10 +64,26 @@ beltimgs={(None,"out",None,"in"):pb.imgGit("img\\belts\\belth11.png",sz,sz),
           (None,"in","out",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),False,False),
           (None,None,"out","in"):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),True,False),
           ("in",None,None,"out"):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),True,True),
+
           ("out","in",None,"in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),90),
           (None,"in","out","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),270),
           ("in","out","in",None):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),0),
-          ("in",None,"in","out"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),180),}
+          ("in",None,"in","out"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),180),
+
+          ("out","in","in",None):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),90),
+          ("in",None,"out","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),270),
+          (None,"out","in","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),0),
+          ("in","in",None,"out"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),180),
+          
+          ("out","in","in",None):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),90),
+          ("in",None,"out","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),270),
+          (None,"out","in","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),0),
+          ("in","in",None,"out"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltl21.png",sz,sz),180),
+          
+          ("out",None,"in","in"):pygame.transform.rotate(pygame.transform.flip(pb.imgGit("img\\belts\\beltl21.png",sz,sz),False,True),90),
+          ("in","in","out",None):pygame.transform.rotate(pygame.transform.flip(pb.imgGit("img\\belts\\beltl21.png",sz,sz),False,True),270),
+          ("in","out",None,"in"):pygame.transform.rotate(pygame.transform.flip(pb.imgGit("img\\belts\\beltl21.png",sz,sz),False,True),0),
+          (None,"in","in","out"):pygame.transform.rotate(pygame.transform.flip(pb.imgGit("img\\belts\\beltl21.png",sz,sz),False,True),180),}
 #list of image for ease of use and stuff lol
 imgs={}#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
 #raw for easy convert
