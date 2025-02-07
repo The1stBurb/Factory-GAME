@@ -58,7 +58,15 @@ beltimgs={(None,"out",None,"in"):pb.imgGit("img\\belts\\belth11.png",sz,sz),
           ("in","out",None,None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,True),
           (None,"out","in",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),False,False),
           (None,None,"in","out"):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),True,False),
-          ("out",None,None,"in"):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),True,True)}
+          ("out",None,None,"in"):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),True,True),
+          ("out","in",None,None):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),False,True),
+          (None,"in","out",None):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),False,False),
+          (None,None,"out","in"):pygame.transform.flip(pb.imgGit("img\\belts\\beltch11.png",sz,sz),True,False),
+          ("in",None,None,"out"):pygame.transform.flip(pb.imgGit("img\\belts\\beltcv11.png",sz,sz),True,True),
+          ("out","in",None,"in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),90),
+          (None,"in","out","in"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),270),
+          ("in","out","in",None):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),0),
+          ("in",None,"in","out"):pygame.transform.rotate(pb.imgGit("img\\belts\\beltt21.png",sz,sz),180),}
 #list of image for ease of use and stuff lol
 imgs={}#{"build":[],"belt":[],"icon":[],"item":[],"other":[]}
 #raw for easy convert
@@ -174,9 +182,7 @@ while True:
                 if not isinstance(square,int):
                     if opposite[sidenum+1] in square.outdirs:
                         sides[sidenum]="in"
-                    print(square.outdirs,opposite[sidenum+1])
             sides[rotion-1]="out"
-            print(sides)
             if not "in" in sides:
                 sides[opposite[rotion]-1]="in"
             try:
