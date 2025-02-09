@@ -1,3 +1,22 @@
+#scalers
+copperScaling = 1
+beltScaling = 1
+sellScaling = 1
+oilScaling = 1
+crystalScaling = 1
+plasticScaling = 1
+smelterScaling = 1
+presserScaling = 1
+cutterScaling = 1
+ironScaling = 1
+waterScaling = 1
+advertizingScaler = 1
+circuitMakerScaler = 1
+crystalSmasherScaler = 1
+oilRefineryScaler = 1
+ciruitMolderScaler = 1
+generalSpeedScaler = 1
+
 
 #variables for basic unlocks:
 # refinedCopperUnlocked = False
