@@ -37,6 +37,26 @@ class SFXRunner:
             pygame.mixer.music.play()
             print(self.ambient[self.ambOn])
 sfx=SFXRunner()
+class Text:
+    def __init__(self,sz):
+        self.ltr={}
+        self.sz=sz
+        ltrs=pb.imgGit("txtFiles\\text1.png",63,64)
+        for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
+            # print(((x%9),(x//9)),i)
+            self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
+    def print(self,msgs,x,y,sz=0,shadow=False):
+        msgs=msgs.split("\n")
+        # print(msgs)
+        sz=self.sz if sz==0 else sz
+        for yps,msg in enumerate(msgs):
+            for xps,i in enumerate(msg):
+                if shadow==True:
+                    # pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x+xps*6*sz,y-1*sz+yps*6*sz)
+                    pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
+                else:
+                    pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
+text=Text(10)
 class item:
     def __init__(self,location,name,price,idd):
         self.img=pb.imgGit(location,20,20)
@@ -233,5 +253,6 @@ while True:
             if j!=0:
                 pb.image(screen,j.image,j.x*sz+grd[0],j.y*sz+grd[1])
             # pb.image(screen,imgs[j],x*sz+grd[0],y*sz+grd[1])
+    text.print("ABCDEFghijklmnopqrstuvwxyz`1234567890-=[]\\;',./~!@#$%^&*()_+{}|:\"<>? ",0,0,shadow=True)
     pygame.display.flip()
     sfx.runAmb()
