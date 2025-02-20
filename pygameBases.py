@@ -6,6 +6,37 @@ def colorize(image, new_color):
     tinted.fill(new_color)
     tinted.blit(image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
     return tinted
+def recolour(image, new_color):
+    # Create a copy of the original image
+    recolored = image.copy()
+    
+    # Get the dimensions of the image
+    width, height = image.get_size()
+    
+    # Lock the surface for pixel manipulation
+    recolored.lock()
+    
+    # Iterate through each pixel
+    for x in range(width):
+        for y in range(height):
+            # Get the current pixel color
+            current_color = image.get_at((x, y))
+            
+            # Calculate the intensity (assuming R, G, and B are equal in greyscale)
+            intensity = current_color.r / 255.0
+            
+            # Calculate the new color components
+            new_r = int(new_color[0] * (1 - intensity))
+            new_g = int(new_color[1] * (1 - intensity))
+            new_b = int(new_color[2] * (1 - intensity))
+            
+            # Set the new color
+            recolored.set_at((x, y), (new_r, new_g, new_b, current_color.a))
+    
+    # Unlock the surface
+    recolored.unlock()
+    
+    return recolored
 #resize an image
 def resize(img,w,h):
     return pygame.transform.scale(img,(w,h))

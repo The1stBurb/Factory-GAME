@@ -37,6 +37,9 @@ class SFXRunner:
             pygame.mixer.music.play()
             print(self.ambient[self.ambOn])
 sfx=SFXRunner()
+purple=(33,32,51)
+darkpurple=(26,26,41)
+lightpurple=(56,55,72)
 class Text:
     def __init__(self,sz):
         self.ltr={}
@@ -45,7 +48,7 @@ class Text:
         for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
             # print(((x%9),(x//9)),i)
             self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
-    def print(self,msgs,x,y,sz=0,shadow=False):
+    def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False):
         msgs=msgs.split("\n")
         # print(msgs)
         sz=self.sz if sz==0 else sz
@@ -53,9 +56,9 @@ class Text:
             for xps,i in enumerate(msg):
                 if shadow==True:
                     # pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x+xps*6*sz,y-1*sz+yps*6*sz)
-                    pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
+                    pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
                 else:
-                    pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
+                    pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()]),sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
 text=Text(10)
 class item:
     def __init__(self,location,name,price,idd):
