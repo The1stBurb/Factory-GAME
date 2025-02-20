@@ -5,6 +5,7 @@ from save_code.comPile import runPiler
 from building_code.base import sz
 import building_code.belt as belt
 import building_code.building as build
+import os
 #comments should consist of, what does this do, why is it here, when is it used
 pygame.init()
 pygame.mixer.init()
@@ -60,6 +61,11 @@ class Text:
                 else:
                     pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()]),sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
 text=Text(10)
+class ResearchTree:
+    def __init__(self):
+        self.clips={}
+        for fils in os.listdir("img/research_tree"):
+            pass
 class item:
     def __init__(self,location,name,price,idd):
         self.img=pb.imgGit(location,20,20)
@@ -183,6 +189,17 @@ toPlace=[]
 rotion=1#rotation used for placing buildings
 
 keydown=False#to prevent double key presses for holding a key
+#DONT KILL THIS HWILE JUST COMMNET OUT PLS
+while True:
+    screen.fill((200,200,200))
+    buttons = pygame.mouse.get_pressed()
+    ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            print(toPlace)
+            quit()
+    
+    pygame.display.flip()
 while True:
     screen.fill((200,200,200))
     # mbt=1
