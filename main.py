@@ -49,23 +49,39 @@ class Text:
         for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
             # print(((x%9),(x//9)),i)
             self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
-    def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False):
-        msgs=msgs.split("\n")
-        # print(msgs)
+    def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False,width=10**100):
+        msgs=str(msgs).split("\n")
         sz=self.sz if sz==0 else sz
+        # msgs2=[]
+        # for i in msgs:
+        #     if len(msg)*sz>width:
+        #         msgs2.append(i[:(width//sz)])
+        #         msgs2.append(i[])
+        #     else:
+        #         msgs2.append(i)
+        # print(msgs)
         for yps,msg in enumerate(msgs):
             for xps,i in enumerate(msg):
                 if shadow==True:
                     # pb.image(screen,pb.resize(self.ltr[i.lower()],sz*6,sz*7),x+xps*6*sz,y-1*sz+yps*6*sz)
                     pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
                 else:
-                    pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()]),sz*6,sz*7),x-1*sz+xps*6*sz,y-1*sz+yps*6*sz)
+                    pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),(x-1+xps*6)*sz,y-1*sz+yps*6*sz)
 text=Text(10)
 class ResearchTree:
-    def __init__(self):
+    def __init__(self,sz):
         self.clips={}
-        for fils in os.listdir("img/research_tree"):
-            pass
+        tot=len(os.listdir("img/research_tree"))
+        for i,fils in enumerate(os.listdir("img/research_tree")):
+            screen.fill((255,255,255))
+            text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
+            text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
+            pygame.display.flip()
+            self.clips[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+    def disp(self):
+        for img in self.clips:
+            pb.image(screen,self.clips[img],0,0)
+rt=ResearchTree(1)
 class item:
     def __init__(self,location,name,price,idd):
         self.img=pb.imgGit(location,20,20)
@@ -198,7 +214,7 @@ while True:
         if i.type == pygame.QUIT:
             print(toPlace)
             quit()
-    
+    rt.disp()
     pygame.display.flip()
 while True:
     screen.fill((200,200,200))
