@@ -49,9 +49,27 @@ class Text:
         for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
             # print(((x%9),(x//9)),i)
             self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
+    def widthy(self,msgs,width,sz):
+        msgs2=[]
+        rebuilt=False
+        for i in msgs:
+            # print(i)
+            if len(i)*sz*7>=width:
+                closest=width//(sz*7)
+                for x in range(closest,-1,-1):
+                    if i[x]==" ":
+                        closest=x
+                    break
+                msgs2.append(i[:closest])
+                msgs2.append(i[closest:])
+                rebuilt=True
+            else:
+                msgs2.append(i)
+        if rebuilt: return self.widthy(msgs2,width,sz)
+        return msgs2
     def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False,width=10**100):
-        msgs=str(msgs).split("\n")
         sz=self.sz if sz==0 else sz
+        msgs=self.widthy(str(msgs).split("\n"),width,sz)
         # msgs2=[]
         # for i in msgs:
         #     if len(msg)*sz>width:
@@ -195,35 +213,29 @@ keydown=False#to prevent double key presses for holding a key
 #DONT KILL THIS HWILE JUST COMMNET OUT PLS
 def box(mx,my,x,y,w=24,h=24):
     return mx>=x and my>=y and mx<=x+w and my<=y+h
-researched=["BetterPower"]
-bought=["EvenBetterPower"]
 class ResearchTree:
     def __init__(self,sz):
         self.norm=self.grey=self.transp={}
-        self.texts={'Better Power': 'Its normal Power, but Better!', 'Even Better Power': 'Its normal Power, but Even Better!', 'Fluids': 'You discover how to use and move Oil and Water!', 'Overclock': 'Make it run faster but not quite so faster that it goes boom!', 'Ads': 'Make advertisements so more people buy your stuff, which means more money!', 'Super Ads': 'Its normal Ads, but Super!', 'Advanced Base': "It's a normal base, but Advanced!", 'Advanced Oil Process': 'Process your Oil, but Advancedly!', 'Advanced Wire': 'Its normal wire, but Advanced!', 'BrainWashing': 'Make the people Want your products, instead of just Needing them!', 'Circuit2': 'A normal Circuit, but 2x better!', 'Circuit3': 'A normal Circuit, but 3x better!', 'Circuit4': 'A normal Circuit, but 4x better!', 'Circuit5': 'A normal Circuit, but 5x better!', 'Circuit6': 'A normal Circuit, but 6x better!', 'Circuit7': 'A normal Circuit, but 7x better!', 'Circuit8': 'A normal Circuit, but 8x better!', 'Circuit9': 'A normal Circuit, but 9x better!', 'Circuit10': 'A normal Circuit, but 10x better!', 'CircuitInfinity': 'A normal Circuit, but Infinity times better!', 'CircuitReligion': 'Start a Religion based around Circuits, to get people to buy more!', 'CompressedCrystal': 'More Crystal per Crystal!', 'Crystal': 'You find some shiny rocks...', 'EliteBase': 'The Elite version of a Base!', 'EliteWire': 'The Elite version of Wires!', 'EndGame': 'It, just like, ends the game. Whats so hard to understand?', 'ExpandFactory': 'You can buy more land, to build more Factory!', 'FracturedPower': 'Its Power, but Fractured. Nobody knows how it works.', 'ImprovedResearch': 'Make your researchers Research more better!', 'IndustrialPower': 'Pollute that environment! Who cares, anyways?', 'Logistics1': 'Make things run more better!', 'Logistics2': 'Make things run even more better!', 'Logistics3': 'Make things run even more betterer!', 'MagicPower': "It's magically magical!", 'MoreMines': 'You can make more mines!', 'NuclearPower': 'You discover how to split the atom!', 'NuclearResearch': 'Can we smash atoms together, instead of apart? Who knows!', 'Oil&Plastic': 'Oil can make this cool rock, we should name it Plastic!', 'RealityCrystal': 'Mine Reality to get these Crystals!', 'RealityMines': 'Mine Reality itself!', 'Rods': 'Why not? They are good weapons!', 'StockTrading': 'Manipulate the Stock Market, so people buy your stuff!', 'Teleporters': 'Make things move even faster!', 'TimeWarp': 'Make your factory enter a different time stream, so it runs faster!', 'UltimateBase': 'The Ultimate version of a Base!', 'UltimateWire': 'The Ultimate version of Wires!'}
-        self.spots={'[45,277]':'BetterPower','[160,277]':'EvenBetterPower','[110,384]':'Fluids','[464,182]':'Overclock','[376,540]':'Ads','[515,539]':'SuperAds','[0,277]':'Base','[324,384]':'AdvancedOilProcess','[677,445]':'AdvancedWire','[827,542]':'BrainWashing','[50,58]':'Circuit2','[118,58]':'Circuit3','[200,58]':'Circuit4','[270,58]':'Circuit5','[338,57]':'Circuit6','[428,57]':'Circuit7','[506,57]':'Circuit8','[599,57]':'Circuit8.5','[700,57]':'Circuit9',"[803,57]":"Circuit10",'[915,56]':'CircuitInfinity',"[704,542]":"CircuitReligion",'[975,56]':'EndGame','[590,384]':'CompressedCrystal','[457,383]':'Crystal','[398,330]':'EliteBase','[795,444]':'EliteWire','[148,3]':'ExpandFactory','[889,286]':'FracturedPower','[42,492]':'ImprovedResearch','[352,278]':'IndustrialPower','[107,129]':'Logistics1','[208,129]':'Logistics2','[300,130]':'Logistics3','[700,280]':'MagicPower','[236,445]':'MoreMines','[536,280]':'NuclearPower','[234,490]':'NuclearResearch','[198,384]':'Oil&Plastic','[730,385]':'RealityCrystal','[543,441]':'RealityMines','[97,220]':'Rods','[910,129]':'StockTrading','[777,130]':'Teleporters','[630,168]':'TimeWarp','[616,331]':'UltimateBase','[917,445]':'UltimateWire'}
+        self.texts={'BetterPower': 'Its normal Power, but Better!', 'EvenBetterPower': 'Its normal Power, but Even Better!', 'Fluids': 'You discover how to use and move Oil and Water!', 'Overclock': 'Make it run faster but not quite so faster that it goes boom!', 'Ads': 'Make advertisements so more people buy your stuff, which means more money!', 'SuperAds': 'Its normal Ads, but Super!', 'AdvancedBase': "It's a normal base, but Advanced!", 'AdvancedOilProcess': 'Process your Oil, but Advancedly!', 'AdvancedWire': 'Its normal wire, but Advanced!', 'BrainWashing': 'Make the people Want your products, instead of just Needing them!', 'Circuit2': 'A normal Circuit, but 2x better!', 'Circuit3': 'A normal Circuit, but 3x better!', 'Circuit4': 'A normal Circuit, but 4x better!', 'Circuit5': 'A normal Circuit, but 5x better!', 'Circuit6': 'A normal Circuit, but 6x better!', 'Circuit7': 'A normal Circuit, but 7x better!', 'Circuit8': 'A normal Circuit, but 8x better!', 'Circuit9': 'A normal Circuit, but 9x better!', 'Circuit10': 'A normal Circuit, but 10x better!', 'CircuitInfinity': 'A normal Circuit, but Infinity times better!', 'CircuitReligion': 'Start a Religion based around Circuits, to get people to buy more!', 'CompressedCrystal': 'More Crystal per Crystal!', 'Crystal': 'You find some shiny rocks...', 'EliteBase': 'The Elite version of a Base!', 'EliteWire': 'The Elite version of Wires!', 'EndGame': 'It, just like, ends the game. Whats so hard to understand?', 'ExpandFactory': 'You can buy more land, to build more Factory!', 'FracturedPower': 'Its Power, but Fractured. Nobody knows how it works.', 'ImprovedResearch': 'Make your researchers Research more better!', 'IndustrialPower': 'Pollute that environment! Who cares, anyways?', 'Logistics1': 'Make things run more better!', 'Logistics2': 'Make things run even more better!', 'Logistics3': 'Make things run even more betterer!', 'MagicPower': "It's magically magical!", 'MoreMines': 'You can make more mines!', 'NuclearPower': 'You discover how to split the atom!', 'NuclearResearch': 'Can we smash atoms together, instead of apart? Who knows!', 'Oil&Plastic': 'Oil can make this cool rock, we should name it Plastic!', 'RealityCrystal': 'Mine Reality to get these Crystals!', 'RealityMines': 'Mine Reality itself!', 'Rods': 'Why not? They are good weapons!', 'StockTrading': 'Manipulate the Stock Market, so people buy your stuff!', 'Teleporters': 'Make things move even faster!', 'TimeWarp': 'Make your factory enter a different time stream, so it runs faster!', 'UltimateBase': 'The Ultimate version of a Base!', 'UltimateWire': 'The Ultimate version of Wires!'}
+        self.spots={'[45,277]':'BetterPower','[160,277]':'EvenBetterPower','[110,384]':'Fluids','[464,182]':'Overclock','[376,540]':'Ads','[515,539]':'SuperAds','[0,277]':'Base','[324,384]':'AdvancedOilProcess','[677,445]':'AdvancedWire',"[243,329]":"AdvancedBase",'[827,542]':'BrainWashing','[50,58]':'Circuit2','[118,58]':'Circuit3','[200,58]':'Circuit4','[270,58]':'Circuit5','[338,57]':'Circuit6','[428,57]':'Circuit7','[506,57]':'Circuit8','[599,57]':'Circuit8.5','[700,57]':'Circuit9',"[803,57]":"Circuit10",'[915,56]':'CircuitInfinity',"[704,542]":"CircuitReligion",'[975,56]':'EndGame','[590,384]':'CompressedCrystal','[457,383]':'Crystal','[398,330]':'EliteBase','[795,444]':'EliteWire','[148,3]':'ExpandFactory','[889,286]':'FracturedPower','[42,492]':'ImprovedResearch','[352,278]':'IndustrialPower','[107,129]':'Logistics1','[208,129]':'Logistics2','[300,130]':'Logistics3','[700,280]':'MagicPower','[236,445]':'MoreMines','[536,280]':'NuclearPower','[234,490]':'NuclearResearch','[198,384]':'Oil&Plastic','[730,385]':'RealityCrystal','[543,441]':'RealityMines','[97,220]':'Rods','[910,129]':'StockTrading','[777,130]':'Teleporters','[630,168]':'TimeWarp','[616,331]':'UltimateBase','[917,445]':'UltimateWire'}
         self.highlight=""
         self.research=[]
         self.bought=[]
-        self.needs=[]
+        self.needs=["BetterPower","EvenBetterPower","Fluids","Overclock","Ads","SuperAds","AdvancedBase","AdvancedOilProcess","AdvancedWire","BrainWashing","Circuit2","Circuit3","Circuit4","Circuit5","Circuit6","Circuit7","Circuit8","Circuit8.5","Circuit9","Circuit10","CircuitInfinity","CircuitReligion","CompressedCrystal","Crystal","EliteBase","EliteWire","EndGame","ExpandFactory","FracturedPower","ImprovedResearch","IndustrialPower","Logistics1","Logistics2","Logistics3","MagicPower","MoreMines","NuclearPower","NuclearResearch","Oil&Plastic","RealityCrystal","RealityMines","Rods","StockTrading","Teleporters","TimeWarp","UltimateBase","UltimateWire",]
         tot=len(os.listdir("img/research_tree/norm"))
         for i,fils in enumerate(os.listdir("img/research_tree/norm")):
             screen.fill((255,255,255))
             text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
             text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
             pygame.display.flip()
-            self.norm[fils]=pb.imgGit(f"img\\research_tree\\norm\\{fils}",1000*sz,580*sz) 
-            # if fils in researched:
-            #     self.research[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)#pb.transparent()
-            # elif fils in bought:
-            #     self.bought[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
-            # else:
-            #     self.needs[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)#pb.greyscale()
+            self.norm[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\norm\\{fils}",1000*sz,580*sz)
+            # self.grey[fils]=pb.imgGit(f"img\\research_tree\\grey\\{fils}",1000*sz,580*sz)
+            # self.transp[fils]=pb.imgGit(f"img\\research_tree\\transp\\{fils}",1000*sz,580*sz)
     def disp(self):
         for img in self.needs:
-            pb.image(screen,pb.greyscale(self.grey[img]),0,0)
+            pb.image(screen,self.grey[img],0,0)
         for img in self.research:
-            pb.image(screen,pb.transparent(self.transp[img]),0,0)
+            pb.image(screen,self.transp[img],0,0)
         for img in self.bought:
             pb.image(screen,self.norm[img],0,0)
 rt=ResearchTree(1)
@@ -238,22 +250,18 @@ while True:
         if i.type == pygame.QUIT:
             print(toPlace)
             quit()
-        # elif i.type==pygame.MOUSEBUTTONDOWN and i.button==1:
-            # print(pygame.mouse.get_pos())
-            # with open("research tree texts.txt","a")as rtt:
-            #     rtt.write(f"\"{chos}\":{ms}")
-            # chos=next(its)
-            # print(chos)
+        elif i.type==pygame.MOUSEBUTTONDOWN and i.button==1:
+            print(pygame.mouse.get_pos())
     rt.disp()
-    #circuit8.5,9,10,base
-    # text.print(str(ms),0,20)
     for i in rt.spots:
         if box(ms[0],ms[1],eval(i)[0],eval(i)[1]):
-            text.print(rt.spots[i],0,0)
+            pb.rect(screen,ms[0],ms[1]-51,111,51,col=(50,50,50))
+            pb.rect(screen,ms[0],ms[1]-51,110,50,col=(100,100,100))
+            pb.rect(screen,ms[0],ms[1]+8-51,110,42,col=(120,120,120))
+            text.print(rt.spots[i],ms[0],ms[1]-50,sz=1)
+            text.print(rt.texts[rt.spots[i]],ms[0],ms[1]+9-51,colour=(255,255,255),sz=1,width=110)
             if pygame.mouse.get_pressed()[0]:
                 rt.highlight=rt.spots[i]
-    # if str(ms)in rt.spots:
-    #     text.print(rt.spots[str(ms)],0,0)
     pygame.display.flip()
 while True:
     screen.fill((200,200,200))
