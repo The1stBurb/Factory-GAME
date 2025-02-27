@@ -6,6 +6,9 @@ def colorize(image, new_color):
     tinted.fill(new_color)
     tinted.blit(image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
     return tinted
+def transparent(image,level):
+    return image.fill((255, 255, 255, 0 if level<0 else (255 if level>255 else level)), special_flags=pygame.BLEND_RGBA_MULT)
+
 def recolour(image, new_color):
     # Create a copy of the original image
     recolored = image.copy()
