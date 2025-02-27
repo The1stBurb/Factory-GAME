@@ -1,11 +1,46 @@
 Better Power - Its normal Power, but Better!
 Even Better Power - Its normal Power, but Even Better!
 Fluids - You discover how to use and move Oil and Water!
-Overclock - Make it run faaaaster but not so faaaaster that it goes boom!
+Overclock - Make it run faster but not quite so faster that it goes boom!
 Ads - Make advertisements so more people buy your stuff, which means more money!
 Super Ads - Its normal Ads, but Super!
-Advanced Base - Its a normal base, but Advanced!
+Advanced Base - It's a normal base, but Advanced!
 Advanced Oil Process - Process your Oil, but Advancedly!
 Advanced Wire - Its normal wire, but Advanced!
-Brain Washing - Make the people Want your products, instead of just Needing them!
-Circuit2 - Level 2 Circuit!
+BrainWashing - Make the people Want your products, instead of just Needing them!
+Circuit2 - A normal Circuit, but 2x better!
+Circuit3 - A normal Circuit, but 3x better!
+Circuit4 - A normal Circuit, but 4x better!
+Circuit5 - A normal Circuit, but 5x better!
+Circuit6 - A normal Circuit, but 6x better!
+Circuit7 - A normal Circuit, but 7x better!
+Circuit8 - A normal Circuit, but 8x better!
+Circuit9 - A normal Circuit, but 9x better!
+Circuit10 - A normal Circuit, but 10x better!
+CircuitInfinity - A normal Circuit, but Infinity times better!
+CircuitReligion - Start a Religion based around Circuits, to get people to buy more!
+CompressedCrystal - More Crystal per Crystal!
+Crystal - You find some shiny rocks...
+EliteBase - The Elite version of a Base!
+EliteWire - The Elite version of Wires!
+EndGame - It, just like, ends the game. Whats so hard to understand?
+ExpandFactory - You can buy more land, to build more Factory!
+FracturedPower - Its Power, but Fractured. Nobody knows how it works.
+ImprovedResearch - Make your researchers Research more better!
+IndustrialPower - Pollute that environment! Who cares, anyways?
+Logistics1 - Make things run more better!
+Logistics2 - Make things run even more better!
+Logistics3 - Make things run even more betterer!
+MagicPower - It's magically magical!
+MoreMines - You can make more mines!
+NuclearPower - You discover how to split the atom!
+NuclearResearch - Can we smash atoms together, instead of apart? Who knows!
+Oil&Plastic - Oil can make this cool rock, we should name it Plastic!
+RealityCrystal - Mine Reality to get these Crystals!
+RealityMines - Mine Reality itself!
+Rods - Why not? They are good weapons!
+StockTrading - Manipulate the Stock Market, so people buy your stuff!
+Teleporters - Make things move even faster!
+TimeWarp - Make your factory enter a different time stream, so it runs faster!
+UltimateBase - The Ultimate version of a Base!
+UltimateWire - The Ultimate version of Wires!

@@ -68,20 +68,7 @@ class Text:
                 else:
                     pb.image(screen,pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),(x-1+xps*6)*sz,y-1*sz+yps*6*sz)
 text=Text(10)
-class ResearchTree:
-    def __init__(self,sz):
-        self.clips={}
-        tot=len(os.listdir("img/research_tree"))
-        for i,fils in enumerate(os.listdir("img/research_tree")):
-            screen.fill((255,255,255))
-            text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
-            text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
-            pygame.display.flip()
-            self.clips[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
-    def disp(self):
-        for img in self.clips:
-            pb.image(screen,self.clips[img],0,0)
-rt=ResearchTree(1)
+
 class item:
     def __init__(self,location,name,price,idd):
         self.img=pb.imgGit(location,20,20)
@@ -206,6 +193,39 @@ rotion=1#rotation used for placing buildings
 
 keydown=False#to prevent double key presses for holding a key
 #DONT KILL THIS HWILE JUST COMMNET OUT PLS
+def box(mx,my,x,y,w=24,h=24):
+    return mx>=x and my>=y and mx<=x+w and my<=y+h
+#C1=50,58
+#C2=118,58
+#C3=200,58
+#C4=270,58
+#C5=338,58
+#C6=428,58
+#C7=506,58
+#C8=599,58
+#C8.5=700,58
+#C10=803,58
+#CIN=915,58
+#EG=975,58
+# circs=[50,118,200,270,338,428,506,599,700,803,915,975]
+class ResearchTree:
+    def __init__(self,sz):
+        self.clips={}
+        self.texts={'Better Power': 'Its normal Power, but Better!', 'Even Better Power': 'Its normal Power, but Even Better!', 'Fluids': 'You discover how to use and move Oil and Water!', 'Overclock': 'Make it run faster but not quite so faster that it goes boom!', 'Ads': 'Make advertisements so more people buy your stuff, which means more money!', 'Super Ads': 'Its normal Ads, but Super!', 'Advanced Base': "It's a normal base, but Advanced!", 'Advanced Oil Process': 'Process your Oil, but Advancedly!', 'Advanced Wire': 'Its normal wire, but Advanced!', 'BrainWashing': 'Make the people Want your products, instead of just Needing them!', 'Circuit2': 'A normal Circuit, but 2x better!', 'Circuit3': 'A normal Circuit, but 3x better!', 'Circuit4': 'A normal Circuit, but 4x better!', 'Circuit5': 'A normal Circuit, but 5x better!', 'Circuit6': 'A normal Circuit, but 6x better!', 'Circuit7': 'A normal Circuit, but 7x better!', 'Circuit8': 'A normal Circuit, but 8x better!', 'Circuit9': 'A normal Circuit, but 9x better!', 'Circuit10': 'A normal Circuit, but 10x better!', 'CircuitInfinity': 'A normal Circuit, but Infinity times better!', 'CircuitReligion': 'Start a Religion based around Circuits, to get people to buy more!', 'CompressedCrystal': 'More Crystal per Crystal!', 'Crystal': 'You find some shiny rocks...', 'EliteBase': 'The Elite version of a Base!', 'EliteWire': 'The Elite version of Wires!', 'EndGame': 'It, just like, ends the game. Whats so hard to understand?', 'ExpandFactory': 'You can buy more land, to build more Factory!', 'FracturedPower': 'Its Power, but Fractured. Nobody knows how it works.', 'ImprovedResearch': 'Make your researchers Research more better!', 'IndustrialPower': 'Pollute that environment! Who cares, anyways?', 'Logistics1': 'Make things run more better!', 'Logistics2': 'Make things run even more better!', 'Logistics3': 'Make things run even more betterer!', 'MagicPower': "It's magically magical!", 'MoreMines': 'You can make more mines!', 'NuclearPower': 'You discover how to split the atom!', 'NuclearResearch': 'Can we smash atoms together, instead of apart? Who knows!', 'Oil&Plastic': 'Oil can make this cool rock, we should name it Plastic!', 'RealityCrystal': 'Mine Reality to get these Crystals!', 'RealityMines': 'Mine Reality itself!', 'Rods': 'Why not? They are good weapons!', 'StockTrading': 'Manipulate the Stock Market, so people buy your stuff!', 'Teleporters': 'Make things move even faster!', 'TimeWarp': 'Make your factory enter a different time stream, so it runs faster!', 'UltimateBase': 'The Ultimate version of a Base!', 'UltimateWire': 'The Ultimate version of Wires!'}
+        tot=len(os.listdir("img/research_tree"))
+        for i,fils in enumerate(os.listdir("img/research_tree")):
+            screen.fill((255,255,255))
+            text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
+            text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
+            pygame.display.flip()
+            self.clips[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+    def disp(self):
+        for img in self.clips:
+            pb.image(screen,self.clips[img],0,0)
+rt=ResearchTree(1)
+its=iter(rt.texts)
+chos=next(its)
+print(chos)
 while True:
     screen.fill((200,200,200))
     buttons = pygame.mouse.get_pressed()
@@ -214,7 +234,21 @@ while True:
         if i.type == pygame.QUIT:
             print(toPlace)
             quit()
+        elif i.type==pygame.MOUSEBUTTONDOWN and i.button==1:
+            print(chos,":",pygame.mouse.get_pos())
+            with open("research tree texts.txt","a")as rtt:
+                rtt.write(f"\"{chos}\":{ms}")
+            chos=next(its)
+            print(chos)
     rt.disp()
+    # for i in circs:
+    #     if box(ms[0],ms[1],i,58):
+    #         pb.rect(screen,ms[0],ms[1],100,100,col=(0,0,0))
+    #bricks are 24x24
+    #expandFact=148,3
+    #base=0,277
+    #betterPower=45,277
+    #evenBetterPower=160,277,industrial Power=352,278,NuclearPower=536,280,MagicPower=700,280,FracPower=889,286
     pygame.display.flip()
 while True:
     screen.fill((200,200,200))
