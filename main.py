@@ -195,8 +195,8 @@ keydown=False#to prevent double key presses for holding a key
 #DONT KILL THIS HWILE JUST COMMNET OUT PLS
 def box(mx,my,x,y,w=24,h=24):
     return mx>=x and my>=y and mx<=x+w and my<=y+h
-researched=[]
-bought=[]
+researched=["BetterPower"]
+bought=["EvenBetterPower"]
 class ResearchTree:
     def __init__(self,sz):
         self.needs={}
@@ -212,11 +212,11 @@ class ResearchTree:
             text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
             pygame.display.flip()
             if fils in researched:
-                self.research[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+                self.research[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)#pb.transparent()
             elif fils in bought:
                 self.bought[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
             else:
-                self.needs[fils]=pb.greypb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+                self.needs[fils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)#pb.greyscale()
     def disp(self):
         for img in self.needs:
             pb.image(screen,self.needs[img],0,0)

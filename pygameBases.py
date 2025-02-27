@@ -8,7 +8,17 @@ def colorize(image, new_color):
     return tinted
 def transparent(image,level):
     return image.fill((255, 255, 255, 0 if level<0 else (255 if level>255 else level)), special_flags=pygame.BLEND_RGBA_MULT)
-
+def greyscale(surface):
+    width, height = surface.get_size()
+    grayscale = pygame.Surface((width, height), pygame.SRCALPHA)
+    
+    for x in range(width):
+        for y in range(height):
+            r, g, b, a = surface.get_at((x, y))
+            L = 0.3 * r + 0.59 * g + 0.11 * b
+            grayscale.set_at((x, y), (int(L), int(L), int(L), a))
+    
+    return grayscale
 def recolour(image, new_color):
     # Create a copy of the original image
     recolored = image.copy()
