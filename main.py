@@ -57,9 +57,11 @@ class Text:
             if len(i)*sz*7>=width:
                 closest=width//(sz*7)
                 for x in range(closest,-1,-1):
+                    # print(x,i[x])
                     if i[x]==" ":
                         closest=x
-                    break
+                        # print(closest,i[x],"ab")
+                        break
                 msgs2.append(i[:closest])
                 msgs2.append(i[closest:])
                 rebuilt=True
@@ -216,6 +218,7 @@ def box(mx,my,x,y,w=24,h=24):
 class ResearchTree:
     def __init__(self,sz):
         self.norm=self.grey=self.transp={}
+        self.rpoints={"Better Power":0,"Even Better Power":0,"Fluids":0,"Overclock":0,"Ads":0,"Super Ads":0,"Advanced Base":0,"Advanced Oil Process":0,"Advanced Wire":0,"BrainWashing":0,"Circuit2":0,"Circuit3":0,"Circuit4":0,"Circuit5":0,"Circuit6":0,"Circuit7":0,"Circuit8":0,"Circuit9":0,"Circuit10":0,"CircuitInfinity":0,"CircuitReligion":0,"CompressedCrystal":0,"Crystal":0,"EliteBase":0,"EliteWire":0,"EndGame":0,"ExpandFactory":0,"FracturedPower":0,"ImprovedResearch":0,"IndustrialPower":0,"Logistics1":0,"Logistics2":0,"Logistics3":0,"MagicPower":0,"MoreMines":0,"NuclearPower":0,"NuclearResearch":0,"Oil&Plastic":0,"RealityCrystal":0,"RealityMines":0,"Rods":0,"StockTrading":0,"Teleporters":0,"TimeWarp":0,"UltimateBase":0,"UltimateWire":0,}
         self.texts={'BetterPower': 'Its normal Power, but Better!', 'EvenBetterPower': 'Its normal Power, but Even Better!', 'Fluids': 'You discover how to use and move Oil and Water!', 'Overclock': 'Make it run faster but not quite so faster that it goes boom!', 'Ads': 'Make advertisements so more people buy your stuff, which means more money!', 'SuperAds': 'Its normal Ads, but Super!', 'AdvancedBase': "It's a normal base, but Advanced!", 'AdvancedOilProcess': 'Process your Oil, but Advancedly!', 'AdvancedWire': 'Its normal wire, but Advanced!', 'BrainWashing': 'Make the people Want your products, instead of just Needing them!', 'Circuit2': 'A normal Circuit, but 2x better!', 'Circuit3': 'A normal Circuit, but 3x better!', 'Circuit4': 'A normal Circuit, but 4x better!', 'Circuit5': 'A normal Circuit, but 5x better!', 'Circuit6': 'A normal Circuit, but 6x better!', 'Circuit7': 'A normal Circuit, but 7x better!', 'Circuit8': 'A normal Circuit, but 8x better!', 'Circuit9': 'A normal Circuit, but 9x better!', 'Circuit10': 'A normal Circuit, but 10x better!', 'CircuitInfinity': 'A normal Circuit, but Infinity times better!', 'CircuitReligion': 'Start a Religion based around Circuits, to get people to buy more!', 'CompressedCrystal': 'More Crystal per Crystal!', 'Crystal': 'You find some shiny rocks...', 'EliteBase': 'The Elite version of a Base!', 'EliteWire': 'The Elite version of Wires!', 'EndGame': 'It, just like, ends the game. Whats so hard to understand?', 'ExpandFactory': 'You can buy more land, to build more Factory!', 'FracturedPower': 'Its Power, but Fractured. Nobody knows how it works.', 'ImprovedResearch': 'Make your researchers Research more better!', 'IndustrialPower': 'Pollute that environment! Who cares, anyways?', 'Logistics1': 'Make things run more better!', 'Logistics2': 'Make things run even more better!', 'Logistics3': 'Make things run even more betterer!', 'MagicPower': "It's magically magical!", 'MoreMines': 'You can make more mines!', 'NuclearPower': 'You discover how to split the atom!', 'NuclearResearch': 'Can we smash atoms together, instead of apart? Who knows!', 'Oil&Plastic': 'Oil can make this cool rock, we should name it Plastic!', 'RealityCrystal': 'Mine Reality to get these Crystals!', 'RealityMines': 'Mine Reality itself!', 'Rods': 'Why not? They are good weapons!', 'StockTrading': 'Manipulate the Stock Market, so people buy your stuff!', 'Teleporters': 'Make things move even faster!', 'TimeWarp': 'Make your factory enter a different time stream, so it runs faster!', 'UltimateBase': 'The Ultimate version of a Base!', 'UltimateWire': 'The Ultimate version of Wires!'}
         self.spots={'[45,277]':'BetterPower','[160,277]':'EvenBetterPower','[110,384]':'Fluids','[464,182]':'Overclock','[376,540]':'Ads','[515,539]':'SuperAds','[0,277]':'Base','[324,384]':'AdvancedOilProcess','[677,445]':'AdvancedWire',"[243,329]":"AdvancedBase",'[827,542]':'BrainWashing','[50,58]':'Circuit2','[118,58]':'Circuit3','[200,58]':'Circuit4','[270,58]':'Circuit5','[338,57]':'Circuit6','[428,57]':'Circuit7','[506,57]':'Circuit8','[599,57]':'Circuit8.5','[700,57]':'Circuit9',"[803,57]":"Circuit10",'[915,56]':'CircuitInfinity',"[704,542]":"CircuitReligion",'[975,56]':'EndGame','[590,384]':'CompressedCrystal','[457,383]':'Crystal','[398,330]':'EliteBase','[795,444]':'EliteWire','[148,3]':'ExpandFactory','[889,286]':'FracturedPower','[42,492]':'ImprovedResearch','[352,278]':'IndustrialPower','[107,129]':'Logistics1','[208,129]':'Logistics2','[300,130]':'Logistics3','[700,280]':'MagicPower','[236,445]':'MoreMines','[536,280]':'NuclearPower','[234,490]':'NuclearResearch','[198,384]':'Oil&Plastic','[730,385]':'RealityCrystal','[543,441]':'RealityMines','[97,220]':'Rods','[910,129]':'StockTrading','[777,130]':'Teleporters','[630,168]':'TimeWarp','[616,331]':'UltimateBase','[917,445]':'UltimateWire'}
         self.highlight=""
@@ -260,6 +263,7 @@ while True:
             pb.rect(screen,ms[0],ms[1]+8-51,110,42,col=(120,120,120))
             text.print(rt.spots[i],ms[0],ms[1]-50,sz=1)
             text.print(rt.texts[rt.spots[i]],ms[0],ms[1]+9-51,colour=(255,255,255),sz=1,width=110)
+            text.print(rt.rpoints[rt.spots[i]],ms[0],ms[1]+9-51,colour=(255,255,255),sz=1,width=110)
             if pygame.mouse.get_pressed()[0]:
                 rt.highlight=rt.spots[i]
     pygame.display.flip()
