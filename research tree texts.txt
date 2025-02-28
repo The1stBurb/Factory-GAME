@@ -8,6 +8,8 @@ Advanced Base - It's a normal base, but Advanced!
 Advanced Oil Process - Process your Oil, but Advancedly!
 Advanced Wire - Its normal wire, but Advanced!
 BrainWashing - Make the people Want your products, instead of just Needing them!
+           0         1         2         3
+           01234567890123456789012345678901
 Circuit2 - A normal Circuit, but 2x better!
 Circuit3 - A normal Circuit, but 3x better!
 Circuit4 - A normal Circuit, but 4x better!
