@@ -42,7 +42,43 @@ sfx=SFXRunner()
 purple=(33,32,51)
 darkpurple=(26,26,41)
 lightpurple=(56,55,72)
-
+class Text:
+    def __init__(self,sz):
+        self.ltr={}
+        self.sz=sz
+        ltrs=pb.imgGit("txtFiles\\text1.png",63,64)
+        for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
+            # print(((x%9),(x//9)),i)
+            self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
+    def widthy(self,msgs,width,sz,iters=0):
+        # return msgs
+        if iters>100:return msgs
+        msgs2=[]
+        rebuilt=False
+        for i in msgs:
+            for digi in range(len(i)):
+                if digi*round(sz*7)>width:
+                    closest=min(width//round(sz*7)+1,len(i)-1)
+                    closest=i.rfind(" ",0,closest)
+                    if closest==-1:break
+                    msgs2.append(i[:closest])
+                    msgs2.append(" "+i[closest+1:])
+                    rebuilt=True
+                    break
+            else: msgs2.append(i)
+        if rebuilt: return self.widthy(msgs2,width,sz,iters+1)
+        return msgs2
+    def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False,width=10**10000):
+        sz=self.sz if sz==0 else sz
+        msgs=self.widthy(str(msgs).split("\n"),width,sz)
+        for yps,msg in enumerate(msgs):
+            for xps,i in enumerate(msg):
+                if shadow==True:
+                    # pb.image(pb.resize(self.ltr[i.lower()],sz*6,sz*7),x+xps*6*sz,y-1*sz+yps*6*sz)
+                    pb.image(pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-sz+math.ceil(xps*6*sz),y+math.ceil(yps*6*sz))
+                else:
+                    pb.image(pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-sz+math.ceil(xps*6*sz),y+math.ceil(yps*6*sz))
+text=Text(10)
 class item:
     def __init__(self,location,name,price,idd):
         self.img=pb.imgGit(location,20,20)
@@ -195,70 +231,30 @@ class ResearchTree:
             pb.image(self.transp[img],0,0)
         for img in self.bought:
             pb.image(self.norm[img],0,0)
-# its=iter(rt.texts)
-# chos=next(its)
-# print(chos)
-class Text:
-    def __init__(self,sz):
-        self.ltr={}
-        self.sz=sz
-        ltrs=pb.imgGit("txtFiles\\text1.png",63,64)
-        for x,i in enumerate("abcdefghijklmnopqrstuvwxyz`1234567890[]\\;',./~!@#$%^&*()_+{}|:\"<>? -="):
-            # print(((x%9),(x//9)),i)
-            self.ltr[i]=ltrs.subsurface(((x%9)*7,(x//9)*8,6,7))#((x%9)*(sz*7),(x-(x//9))*(sz*8),6*sz,7*sz))
-    def widthy(self,msgs,width,sz,iters=0):
-        # return msgs
-        if iters>5:return msgs
-        msgs2=[]
-        rebuilt=False
-        for i in msgs:
-            for digi in range(len(i)):
-                if digi*round(sz*7)>width:
-                    closest=min(width//round(sz*7)+1,len(i)-1)
-                    print(closest,f"-{i[closest]}-",len(i))
-                    for x in range(closest,-1,-1):
-                        if i[x]==" ":
-                            closest=x
-                            print(f"-{i[x]}-",x)
-                            break
-                    msgs2.append(i[:closest])
-                    msgs2.append(i[closest:])
-                    if x!=0:rebuilt=False
-                    break
-                else:
-                    msgs2.append(i)
-        if rebuilt: return self.widthy(msgs2,width,sz,iters+1)
-        return msgs2
-    def print(self,msgs,x,y,colour=lightpurple,sz=0,shadow=False,width=10**10000):
-        sz=self.sz if sz==0 else sz
-        msgs=self.widthy(str(msgs).split("\n"),width,sz)
-        for yps,msg in enumerate(msgs):
-            for xps,i in enumerate(msg):
-                if shadow==True:
-                    # pb.image(pb.resize(self.ltr[i.lower()],sz*6,sz*7),x+xps*6*sz,y-1*sz+yps*6*sz)
-                    pb.image(pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-sz+math.ceil(xps*6*sz),y+math.ceil(yps*6*sz))
-                else:
-                    pb.image(pb.resize(pb.recolour(self.ltr[i.lower()],colour),sz*6,sz*7),x-sz+math.ceil(xps*6*sz),y+math.ceil(yps*6*sz))
-text=Text(10)
-pb.rect(0,0,100,20,col=(100,100,100))
-text.print(f"1.23K/1.23K Research Points",0,0,colour=(255,255,255),sz=0.86)
-pb.flip()
-pb.rect(0,0,100,20,col=(100,100,100))
-text.print(f"1.23K/1.23K Research Points",0,0,colour=(255,255,255),sz=0.86,width=111)
-pb.flip()
-input("widdle")
-quit()
+        if self.highlight!="":
+            pb.rect(0,0,X,Y,col=(0,0,0,200))
+            if self.highlight in self.grey:
+                pb.image(self.grey[self.highlight])
+            elif self.highlight in self.transp:
+                pb.image(self.transp[self.highlight])
+            elif self.highlight in self.norm:
+                pb.image(self.norm[self.highlight])
 rt=ResearchTree(1)
+pastbtn,buttons=[False,False,False],[0,0,0]
 while True:
     screen.fill((200,200,200))
-    buttons = pygame.mouse.get_pressed()
+    # buttons = pygame.mouse.get_pressed()
     ms=[pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]]
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             print(toPlace)
             quit()
-        elif i.type==pygame.MOUSEBUTTONDOWN and i.button==1:
-            print(pygame.mouse.get_pos())
+        elif i.type==pygame.MOUSEBUTTONDOWN:
+            if i.button==1:
+                print(pygame.mouse.get_pos())
+                buttons[0]=True
+        # elif i.type==pygame.MOUSEBUTTONUP:
+        #     buttons=[False,False,False]
     rt.disp()
     for i in rt.spots:
         if box(ms[0],ms[1],eval(i)[0],eval(i)[1]):
@@ -268,12 +264,18 @@ while True:
             pb.rect(0,8,110,42,col=(120,120,120))
             text.print(rt.spots[i],1,1,sz=1)
             text.print(rt.texts[rt.spots[i]],1.5,9,colour=(255,255,255),sz=1,width=110)
-
             # text.print(f"1.23K/1.23K Research Points",2,40,colour=(255,255,255),sz=0.86,width=111)
+            if not rt.highlight in["",rt.spots[i]]:
+                pb.rect(0,0,111,51,col=(0,0,0,200))
             pb.pop()
-            if pygame.mouse.get_pressed()[0]:
-                rt.highlight=rt.spots[i]
+            if buttons[0]and not pastbtn[0]:
+                buttons[0]=False
+                print(rt.highlight)
+                rt.highlight=rt.spots[i] if rt.highlight!=rt.spots[i] else ""
+                print(rt.highlight)
     pb.flip()
+    pastBtn=buttons.copy()
+    # buttons=[False,False,False]
 while True:
     screen.fill((200,200,200))
     # mbt=1

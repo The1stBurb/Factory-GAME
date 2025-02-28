@@ -74,7 +74,11 @@ class pb:
     #create a rectanngle
     def rect(self,x,y,w,h,col=(255,255,255),width=0):
         # print(col)
-        pygame.draw.rect(self.screen, col, pygame.Rect(x+self.moveBy[0], y+self.moveBy[1], w, h),width)
+        if len(col)==3:
+            col=col+(255,)
+        srfce=pygame.Surface((w,h),pygame.SRCALPHA)
+        pygame.draw.rect(srfce, col,(0,0, w, h),width)
+        self.screen.blit(srfce,(x+self.moveBy[0], y+self.moveBy[1]))
     #write text
     def text(self,font,txt,x,y,col=(0,0,0)):
         self.screen.blit(font.render(txt, True, col),(x+self.moveBy[0],y+self.moveBy[1]))
@@ -82,7 +86,7 @@ class pb:
     def quad(self,x1,y1,x2,y2,x3,y3,x4,y4,col=(255,255,255)):
         pygame.draw.polygon(self.screen, col, [(x1+self.moveBy[0],y1+self.moveBy[1]),(x2+self.moveBy[0],y2+self.moveBy[1]),(x3+self.moveBy[0],y3+self.moveBy[1]),(x4+self.moveBy[0],y4+self.moveBy[1]),])
     #blit an image
-    def image(self,img,x,y):
+    def image(self,img,x=0,y=0):
         self.screen.blit(img,(x+self.moveBy[0],y+self.moveBy[1]))
     #pull image form path
     def gitImg(self,path):
