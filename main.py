@@ -226,16 +226,16 @@ class ResearchTree:
             text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
             pb.flip()
             nfils=fils.replace(".png","")
-            if nfils in self.research: self.prple[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
-            elif nfils in self.bought: self.green[fils]=pb.imgGit(f"img\\research_tree\\grey\\{fils}",1000*sz,580*sz)
-            elif nfils in self.needs: self.grey[fils]=pb.imgGit(f"img\\research_tree\\transp\\{fils}",1000*sz,580*sz)
+            if nfils in self.research: self.prple[nfils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+            elif nfils in self.bought: self.green[nfils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+            elif nfils in self.needs: self.grey[nfils]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
     def disp(self):
         for i in self.spots:
             spot=eval(i)
             nam=self.spots[i]
-            if nam in self.grey:pb.image(self.base_grey)
-            elif nam in self.green:pb.image(self.base_green)
-            elif nam in self.prple:pb.image(self.base_prple)
+            if nam in self.grey:pb.image(self.base_grey,spot[0],spot[1])
+            elif nam in self.green:pb.image(self.base_green,spot[0],spot[1])
+            elif nam in self.prple:pb.image(self.base_prple,spot[0],spot[1])
         for img in self.needs:
             pb.image(self.grey[img],0,0)
         for img in self.research:
@@ -243,7 +243,7 @@ class ResearchTree:
         for img in self.bought:
             pb.image(self.norm[img],0,0)
         if self.highlight!="":
-            pb.rect(0,0,X,Y,col=(0,0,0,200))
+            pb.rect(0,0,X,Y,col=(100,100,100,200))
             if self.highlight in self.grey:
                 pb.image(self.grey[self.highlight])
             elif self.highlight in self.transp:
