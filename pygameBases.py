@@ -72,12 +72,12 @@ class pb:
         rot_image = rot_image.subsurface(rot_rect).copy()
         return rot_image
     #create a rectanngle
-    def rect(self,x,y,w,h,col=(255,255,255),width=0):
+    def rect(self,x,y,w,h,col=(255,255,255),width=0,radius=-1):
         # print(col)
         if len(col)==3:
             col=col+(255,)
         srfce=pygame.Surface((w,h),pygame.SRCALPHA)
-        pygame.draw.rect(srfce, col,(0,0, w, h),width)
+        pygame.draw.rect(srfce, col,(0,0, w, h),width=width,border_radius=radius)
         self.screen.blit(srfce,(x+self.moveBy[0], y+self.moveBy[1]))
     #write text
     def text(self,font,txt,x,y,col=(0,0,0)):
