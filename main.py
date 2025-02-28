@@ -207,7 +207,7 @@ def box(mx,my,x,y,w=24,h=24):
     return mx>=x and my>=y and mx<=x+w and my<=y+h
 class ResearchTree:
     def __init__(self,sz):
-        self.norm=self.grey=self.transp={}
+        self.grey=self.green=self.prple={}
         self.rpoints={"Base":0,"BetterPower":0,"EvenBetterPower":0,"Fluids":0,"Overclock":0,"Ads":0,"SuperAds":0,"AdvancedBase":0,"AdvancedOilProcess":0,"AdvancedWire":0,"BrainWashing":0,"Circuit2":0,"Circuit3":0,"Circuit4":0,"Circuit5":0,"Circuit6":0,"Circuit7":0,"Circuit8":0,"Circuit8.5":0,"Circuit9":0,"Circuit10":0,"CircuitInfinity":0,"CircuitReligion":0,"CompressedCrystal":0,"Crystal":0,"EliteBase":0,"EliteWire":0,"EndGame":0,"ExpandFactory":0,"FracturedPower":0,"ImprovedResearch":0,"IndustrialPower":0,"Logistics1":0,"Logistics2":0,"Logistics3":0,"MagicPower":0,"MoreMines":0,"NuclearPower":0,"NuclearResearch":0,"Oil&Plastic":0,"RealityCrystal":0,"RealityMines":0,"Rods":0,"StockTrading":0,"Teleporters":0,"TimeWarp":0,"UltimateBase":0,"UltimateWire":0,}
         self.texts={"Base":"Everyone starts somewhere!",'BetterPower': 'Its normal Power, but Better!', 'EvenBetterPower': 'Its normal Power, but Even Better!', 'Fluids': 'You discover how to use and move Oil and Water!', 'Overclock': 'Make it run faster but not quite so faster that it goes boom!', 'Ads': 'Make advertisements so more people buy your stuff, which means more money!', 'SuperAds': 'Its normal Ads, but Super!', 'AdvancedBase': "It's a normal base, but Advanced!", 'AdvancedOilProcess': 'Process your Oil, but Advancedly!', 'AdvancedWire': 'Its normal wire, but Advanced!', 'BrainWashing': 'Make the people Want your products, instead of just Needing them!', 'Circuit2': 'A normal Circuit, but 2x better!', 'Circuit3': 'A normal Circuit, but 3x better!', 'Circuit4': 'A normal Circuit, but 4x better!', 'Circuit5': 'A normal Circuit, but 5x better!', 'Circuit6': 'A normal Circuit, but 6x better!', 'Circuit7': 'A normal Circuit, but 7x better!', 'Circuit8': 'A normal Circuit, but 8x better!', "Circuit8.5":"A normal Circuit, but 8.5x better!",'Circuit9': 'A normal Circuit, but 9x better!', 'Circuit10': 'A normal Circuit, but 10x better!', 'CircuitInfinity': 'A normal Circuit, but Infinity times better!', 'CircuitReligion': 'Start a Religion based around Circuits, to get people to buy more!', 'CompressedCrystal': 'More Crystal per Crystal!', 'Crystal': 'You find some shiny rocks...', 'EliteBase': 'The Elite version of a Base!', 'EliteWire': 'The Elite version of Wires!', 'EndGame': 'It, just like, ends the game. Whats so hard to understand?', 'ExpandFactory': 'You can buy more land, to build more Factory!', 'FracturedPower': 'Its Power, but Fractured. Nobody knows how it works.', 'ImprovedResearch': 'Make your researchers Research more better!', 'IndustrialPower': 'Pollute that environment! Who cares, anyways?', 'Logistics1': 'Make things run more better!', 'Logistics2': 'Make things run even more better!', 'Logistics3': 'Make things run even more betterer!', 'MagicPower': "It's magically magical!", 'MoreMines': 'You can make more mines!', 'NuclearPower': 'You discover how to split the atom!', 'NuclearResearch': 'Can we smash atoms together, instead of apart? Who knows!', 'Oil&Plastic': 'Oil can make this cool rock, we should name it Plastic!', 'RealityCrystal': 'Mine Reality to get these Crystals!', 'RealityMines': 'Mine Reality itself!', 'Rods': 'Why not? They are good weapons!', 'StockTrading': 'Manipulate the Stock Market, so people buy your stuff!', 'Teleporters': 'Make things move even faster!', 'TimeWarp': 'Make your factory enter a different time stream, so it runs faster!', 'UltimateBase': 'The Ultimate version of a Base!', 'UltimateWire': 'The Ultimate version of Wires!'}
         self.spots={'[45,277]':'BetterPower','[160,277]':'EvenBetterPower','[110,384]':'Fluids','[464,182]':'Overclock','[376,540]':'Ads','[515,539]':'SuperAds','[0,277]':'Base','[324,384]':'AdvancedOilProcess','[677,445]':'AdvancedWire',"[243,329]":"AdvancedBase",'[827,542]':'BrainWashing','[50,58]':'Circuit2','[118,58]':'Circuit3','[200,58]':'Circuit4','[270,58]':'Circuit5','[338,57]':'Circuit6','[428,57]':'Circuit7','[506,57]':'Circuit8','[599,57]':'Circuit8.5','[700,57]':'Circuit9',"[803,57]":"Circuit10",'[915,56]':'CircuitInfinity',"[704,542]":"CircuitReligion",'[975,56]':'EndGame','[590,384]':'CompressedCrystal','[457,383]':'Crystal','[398,330]':'EliteBase','[795,444]':'EliteWire','[148,3]':'ExpandFactory','[889,286]':'FracturedPower','[42,492]':'ImprovedResearch','[352,278]':'IndustrialPower','[107,129]':'Logistics1','[208,129]':'Logistics2','[300,130]':'Logistics3','[700,280]':'MagicPower','[236,445]':'MoreMines','[536,280]':'NuclearPower','[234,490]':'NuclearResearch','[198,384]':'Oil&Plastic','[730,385]':'RealityCrystal','[543,441]':'RealityMines','[97,220]':'Rods','[910,129]':'StockTrading','[777,130]':'Teleporters','[630,168]':'TimeWarp','[616,331]':'UltimateBase','[917,445]':'UltimateWire'}
@@ -216,22 +216,32 @@ class ResearchTree:
         self.bought=[]
         self.needs=["BetterPower","EvenBetterPower","Fluids","Overclock","Ads","SuperAds","AdvancedBase","AdvancedOilProcess","AdvancedWire","BrainWashing","Circuit2","Circuit3","Circuit4","Circuit5","Circuit6","Circuit7","Circuit8","Circuit8.5","Circuit9","Circuit10","CircuitInfinity","CircuitReligion","CompressedCrystal","Crystal","EliteBase","EliteWire","EndGame","ExpandFactory","FracturedPower","ImprovedResearch","IndustrialPower","Logistics1","Logistics2","Logistics3","MagicPower","MoreMines","NuclearPower","NuclearResearch","Oil&Plastic","RealityCrystal","RealityMines","Rods","StockTrading","Teleporters","TimeWarp","UltimateBase","UltimateWire",]
         tot=len(os.listdir("img/research_tree"))
+        self.base_grey=pb.imgGit("img/research_tree/bases/grey.png",24*sz,24*sz)
+        self.base_green=pb.imgGit("img/research_tree/bases/green.png",24*sz,24*sz)
+        self.base_prple=pb.imgGit("img/research_tree/bases/prple.png",24*sz,24*sz)
         for i,fils in enumerate(os.listdir("img/research_tree")):
             if os.path.isdir(f"img\\research_tree\\{fils}"):continue
             screen.fill((255,255,255))
             text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
             text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
             pb.flip()
-            self.norm[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
-            # self.grey[fils]=pb.imgGit(f"img\\research_tree\\grey\\{fils}",1000*sz,580*sz)
-            # self.transp[fils]=pb.imgGit(f"img\\research_tree\\transp\\{fils}",1000*sz,580*sz)
+            nfils=fils.replace(".png","")
+            if nfils in self.research: self.prple[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
+            elif nfils in self.bought: self.green[fils]=pb.imgGit(f"img\\research_tree\\grey\\{fils}",1000*sz,580*sz)
+            elif nfils in self.needs: self.grey[fils]=pb.imgGit(f"img\\research_tree\\transp\\{fils}",1000*sz,580*sz)
     def disp(self):
-        for img in self.needs:
-            pb.image(self.grey[img],0,0)
-        for img in self.research:
-            pb.image(self.transp[img],0,0)
-        for img in self.bought:
-            pb.image(self.norm[img],0,0)
+        for i in self.spots:
+            spot=eval(i)
+            nam=self.spots[i]
+            if nam in self.grey:pb.image()
+            elif nam in self.green:pb.image()
+            elif nam in self.prple:pb.image()
+        # for img in self.needs:
+        #     pb.image(self.grey[img],0,0)
+        # for img in self.research:
+        #     pb.image(self.transp[img],0,0)
+        # for img in self.bought:
+        #     pb.image(self.norm[img],0,0)
         if self.highlight!="":
             pb.rect(0,0,X,Y,col=(0,0,0,200))
             if self.highlight in self.grey:
