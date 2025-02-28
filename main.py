@@ -233,15 +233,15 @@ class ResearchTree:
         for i in self.spots:
             spot=eval(i)
             nam=self.spots[i]
-            if nam in self.grey:pb.image()
-            elif nam in self.green:pb.image()
-            elif nam in self.prple:pb.image()
-        # for img in self.needs:
-        #     pb.image(self.grey[img],0,0)
-        # for img in self.research:
-        #     pb.image(self.transp[img],0,0)
-        # for img in self.bought:
-        #     pb.image(self.norm[img],0,0)
+            if nam in self.grey:pb.image(self.base_grey)
+            elif nam in self.green:pb.image(self.base_green)
+            elif nam in self.prple:pb.image(self.base_prple)
+        for img in self.needs:
+            pb.image(self.grey[img],0,0)
+        for img in self.research:
+            pb.image(self.transp[img],0,0)
+        for img in self.bought:
+            pb.image(self.norm[img],0,0)
         if self.highlight!="":
             pb.rect(0,0,X,Y,col=(0,0,0,200))
             if self.highlight in self.grey:
