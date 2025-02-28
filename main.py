@@ -215,13 +215,14 @@ class ResearchTree:
         self.research=[]
         self.bought=[]
         self.needs=["BetterPower","EvenBetterPower","Fluids","Overclock","Ads","SuperAds","AdvancedBase","AdvancedOilProcess","AdvancedWire","BrainWashing","Circuit2","Circuit3","Circuit4","Circuit5","Circuit6","Circuit7","Circuit8","Circuit8.5","Circuit9","Circuit10","CircuitInfinity","CircuitReligion","CompressedCrystal","Crystal","EliteBase","EliteWire","EndGame","ExpandFactory","FracturedPower","ImprovedResearch","IndustrialPower","Logistics1","Logistics2","Logistics3","MagicPower","MoreMines","NuclearPower","NuclearResearch","Oil&Plastic","RealityCrystal","RealityMines","Rods","StockTrading","Teleporters","TimeWarp","UltimateBase","UltimateWire",]
-        tot=len(os.listdir("img/research_tree/norm"))
-        for i,fils in enumerate(os.listdir("img/research_tree/norm")):
+        tot=len(os.listdir("img/research_tree"))
+        for i,fils in enumerate(os.listdir("img/research_tree")):
+            if os.path.isdir(f"img\\research_tree\\{fils}"):continue
             screen.fill((255,255,255))
             text.print(f"{i}/{tot-1} Research Tree Imgs loaded",0,0,sz=5)
             text.print("|"+("&"*(i+1))+(" "*(tot-(i+1)))+"|",0,25,sz=2)
             pb.flip()
-            self.norm[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\norm\\{fils}",1000*sz,580*sz)
+            self.norm[fils.replace(".png","")]=pb.imgGit(f"img\\research_tree\\{fils}",1000*sz,580*sz)
             # self.grey[fils]=pb.imgGit(f"img\\research_tree\\grey\\{fils}",1000*sz,580*sz)
             # self.transp[fils]=pb.imgGit(f"img\\research_tree\\transp\\{fils}",1000*sz,580*sz)
     def disp(self):
