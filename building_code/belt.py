@@ -1,7 +1,7 @@
 import time
 
 class Belt:
-    def __init__(self,x,y,sides,image):
+    def __init__(self,x,y,sides,image,outdirs=[],indirs=[]):
         self.x=x
         self.y=y
         self.outdirs=[]
@@ -11,7 +11,8 @@ class Belt:
                 self.indirs.append(x+1)
             elif side=="out":
                 self.outdirs.append(x+1)
-
+        if outdirs!=[] and indirs!=[]:
+            self.outdirs,self.indirs=outdirs,indirs
         self.currentchoice=0#for round robin purposes
 
         self.time=time.time()
@@ -61,3 +62,5 @@ class Belt:
             self.image=beltimgs[sides]
         except:
             self.image=error
+    def __repr__(self):
+        return f"belt.Belt({self.x},{self.y},{[0,0,0,0]},{self.outdirs},{self.indirs})"

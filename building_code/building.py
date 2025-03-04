@@ -30,6 +30,8 @@ class CuCond:
     def use(self,other):
         if len(other.inv)<other.maxinv:
             other.inv.append(self.complete.pop(0))
+    def __repr__(self):
+        return f"building.CuCond({self.x},{self.x},imgs[\"CuCond\"])"
 #base class to copy
 # class Belt(Building):
 #     def __init__(self,x,y):
