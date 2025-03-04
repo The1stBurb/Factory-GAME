@@ -268,6 +268,10 @@ while True:
         # elif i.type==pygame.MOUSEBUTTONUP:
         #     buttons=[False,False,False]
     rt.disp()
+    if rt.highlight!="":
+        pb.rect(X-340,-10,340,50,radius=15,col=lightpurple)
+        text.print(f"1.23K/1.23K Research Points",X-5,0,colour=(0,0,0),sz=2,right_align=True)
+        # pb.image(rt.yes,X-300,30)
     for i in rt.spots:
         if box(ms[0],ms[1],eval(i)[0],eval(i)[1]):
             pb.translate((X-110 if ms[0]+110>X else ms[0])+(10 if ms[1]-50<0 else 0),(ms[1] if ms[1]-50<0 else ms[1]-50))#
@@ -285,10 +289,6 @@ while True:
                 # print(rt.highlight)
                 rt.highlight=rt.spots[i] if rt.highlight!=rt.spots[i] else ""
                 # print(rt.highlight)
-    if rt.highlight!="":
-        pb.rect(X-340,-10,340,50,radius=15,col=lightpurple)
-        text.print(f"1.23K/1.23K Research Points",X-5,0,colour=(0,0,0),sz=2,right_align=True)
-        pb.image(rt.yes,X-300,30)
     pb.flip()
     pastBtn=buttons.copy()
     # buttons=[False,False,False]
