@@ -234,14 +234,20 @@ def saveStuff(encode=True):
     global grid,moneyScaler,cuCondScaler,beltSpeedScaler,money
     #classes here
     global rt
-    saveList=(grid)
+    saveList=(grid,moneyScaler,cuCondScaler,beltSpeedScaler,money,"Seperator! Yay!",rt.needs,rt.bought,rt.research)
     runPiler(save.saveNum,str(saveList),encode=encode)
 def unSaveStuff():
     #variables here
     global grid,moneyScaler,cuCondScaler,beltSpeedScaler,money
     #classes here
     global rt
-    grid=eval(runPiler(save.saveNum))
+    saved=runPiler(save.saveNum)
+    print("-"+saved+"-")
+    if saved=="":
+        saveStuff()
+    else:
+        grid,moneyScaler,cuCondScaler,beltSpeedScaler,money,_,rt.needs,rt.bought,rt.research=eval(saved)
+    # print(grid)
 setup(10)
 
 ms=[0,0]#mouse
@@ -300,7 +306,7 @@ def runResearchTree():
         pb.flip()
         pastBtn=buttons.copy()
         # buttons=[False,False,False]
-# unSaveStuff()
+unSaveStuff()
 while True:
     screen.fill((200,200,200))
     # mbt=1

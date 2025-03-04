@@ -6,6 +6,7 @@ class Belt:
         self.y=y
         self.outdirs=[]
         self.indirs=[]
+        self.sides=sides
         for x,side in enumerate(sides):
             if side=="in":
                 self.indirs.append(x+1)
@@ -13,6 +14,7 @@ class Belt:
                 self.outdirs.append(x+1)
         if outdirs!=[] and indirs!=[]:
             self.outdirs,self.indirs=outdirs,indirs
+        # print(sides,self.indirs,self.outdirs)
         self.currentchoice=0#for round robin purposes
 
         self.time=time.time()
@@ -57,10 +59,10 @@ class Belt:
             sides[i-1]="out"
         for i in self.indirs:
             sides[i-1]="in"
-        print(sides)
+        # print(sides)
         try:
             self.image=beltimgs[sides]
         except:
             self.image=error
     def __repr__(self):
-        return f"belt.Belt({self.x},{self.y},{[0,0,0,0]},{self.outdirs},{self.indirs})"
+        return f"belt.Belt({self.x},{self.y},{self.sides},beltimgs[tuple({self.sides})])"
