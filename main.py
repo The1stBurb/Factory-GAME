@@ -242,9 +242,9 @@ def unSaveStuff():
     #classes here
     global rt
     saved=runPiler(save.saveNum)
-    print("-"+saved+"-")
     if saved=="":
         saveStuff()
+        print("Started new save!")
     else:
         grid,moneyScaler,cuCondScaler,beltSpeedScaler,money,_,rt.needs,rt.bought,rt.research=eval(saved)
     # print(grid)
