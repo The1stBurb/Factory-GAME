@@ -1,1 +1,1 @@
-print(eval("\"abc\"\"asdf\""))
+print(eval("\"abc\"\"asdf\""))#newcomp
